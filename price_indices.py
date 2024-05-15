@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[2]:
-
-
 from typing import Dict
 from math import sqrt, log, exp
 
@@ -14,16 +11,19 @@ from math import sqrt, log, exp
 #
 # ### Unweighted Methods
 
-# In[ ]:
 
-
-def jevons_index(prices_0: Dict[str, float], prices_t: Dict[str, float]) -> float:
+def jevons_index(
+    prices_0: Dict[str, float],
+    prices_t: Dict[str, float],
+    normalization_value: float = 100,
+) -> float:
     """
     Calculate the Jevons price index.
 
     Args:
         prices_0 (Dict[str, float]): Prices of products at time 0.
         prices_t (Dict[str, float]): Prices of products at time t.
+        normalization_value (float): The value to normalize the index to. Defaults to 100.
 
     Returns:
         float: Jevons price index.
@@ -38,16 +38,21 @@ def jevons_index(prices_0: Dict[str, float], prices_t: Dict[str, float]) -> floa
     for product_id in matched_products:
         product *= (prices_t[product_id] / prices_0[product_id]) ** (1 / n)
 
-    return product
+    return product * normalization_value
 
 
-def dutot_index(prices_0: Dict[str, float], prices_t: Dict[str, float]) -> float:
+def dutot_index(
+    prices_0: Dict[str, float],
+    prices_t: Dict[str, float],
+    normalization_value: float = 100,
+) -> float:
     """
     Calculate the Dutot price index.
 
     Args:
         prices_0 (Dict[str, float]): Prices of products at time 0.
         prices_t (Dict[str, float]): Prices of products at time t.
+        normalization_value (float): The value to normalize the index to. Defaults to 100.
 
     Returns:
         float: Dutot price index.
@@ -60,16 +65,21 @@ def dutot_index(prices_0: Dict[str, float], prices_t: Dict[str, float]) -> float
     sum_prices_0 = sum(prices_0[product_id] for product_id in matched_products)
     sum_prices_t = sum(prices_t[product_id] for product_id in matched_products)
 
-    return sum_prices_t / sum_prices_0
+    return (sum_prices_t / sum_prices_0) * normalization_value
 
 
-def carli_index(prices_0: Dict[str, float], prices_t: Dict[str, float]) -> float:
+def carli_index(
+    prices_0: Dict[str, float],
+    prices_t: Dict[str, float],
+    normalization_value: float = 100,
+) -> float:
     """
     Calculate the Carli price index.
 
     Args:
         prices_0 (Dict[str, float]): Prices of products at time 0.
         prices_t (Dict[str, float]): Prices of products at time t.
+        normalization_value (float): The value to normalize the index to. Defaults to 100.
 
     Returns:
         float: Carli price index.
@@ -84,16 +94,21 @@ def carli_index(prices_0: Dict[str, float], prices_t: Dict[str, float]) -> float
         prices_t[product_id] / prices_0[product_id] for product_id in matched_products
     )
 
-    return sum_relatives / n
+    return (sum_relatives / n) * normalization_value
 
 
-def bmw_index(prices_0: Dict[str, float], prices_t: Dict[str, float]) -> float:
+def bmw_index(
+    prices_0: Dict[str, float],
+    prices_t: Dict[str, float],
+    normalization_value: float = 100,
+) -> float:
     """
     Calculate the Balk-Mehrhoff-Walsh (BMW) price index.
 
     Args:
         prices_0 (Dict[str, float]): Prices of products at time 0.
         prices_t (Dict[str, float]): Prices of products at time t.
+        normalization_value (float): The value to normalize the index to. Defaults to 100.
 
     Returns:
         float: BMW price index.
@@ -118,18 +133,17 @@ def bmw_index(prices_0: Dict[str, float], prices_t: Dict[str, float]) -> float:
     if denominator == 0:
         raise ValueError("Denominator is zero, cannot compute BMW index.")
 
-    return numerator / denominator
+    return (numerator / denominator) * normalization_value
 
 
 # ### Weighted Methods
-
-# In[4]:
 
 
 def laspeyres_index(
     prices_0: Dict[str, float],
     prices_t: Dict[str, float],
     quantities_0: Dict[str, float],
+    normalization_value: float = 100,
 ) -> float:
     """
     Calculate the Laspeyres price index.
@@ -138,6 +152,7 @@ def laspeyres_index(
         prices_0 (Dict[str, float]): Prices of products at time 0.
         prices_t (Dict[str, float]): Prices of products at time t.
         quantities_0 (Dict[str, float]): Quantities of products at time 0.
+        normalization_value (float): The value to normalize the index to. Defaults to 100.
 
     Returns:
         float: Laspeyres price index.
@@ -158,13 +173,14 @@ def laspeyres_index(
         for product_id in matched_products
     )
 
-    return numerator / denominator
+    return (numerator / denominator) * normalization_value
 
 
 def paasche_index(
     prices_0: Dict[str, float],
     prices_t: Dict[str, float],
     quantities_t: Dict[str, float],
+    normalization_value: float = 100,
 ) -> float:
     """
     Calculate the Paasche price index.
@@ -173,6 +189,7 @@ def paasche_index(
         prices_0 (Dict[str, float]): Prices of products at time 0.
         prices_t (Dict[str, float]): Prices of products at time t.
         quantities_t (Dict[str, float]): Quantities of products at time t.
+        normalization_value (float): The value to normalize the index to. Defaults to 100.
 
     Returns:
         float: Paasche price index.
@@ -193,7 +210,7 @@ def paasche_index(
         for product_id in matched_products
     )
 
-    return numerator / denominator
+    return (numerator / denominator) * normalization_value
 
 
 def fisher_index(
@@ -201,6 +218,7 @@ def fisher_index(
     prices_t: Dict[str, float],
     quantities_0: Dict[str, float],
     quantities_t: Dict[str, float],
+    normalization_value: float = 100,
 ) -> float:
     """
     Calculate the Fisher price index.
@@ -210,12 +228,13 @@ def fisher_index(
         prices_t (Dict[str, float]): Prices of products at time t.
         quantities_0 (Dict[str, float]): Quantities of products at time 0.
         quantities_t (Dict[str, float]): Quantities of products at time t.
+        normalization_value (float): The value to normalize the index to. Defaults to 100.
 
     Returns:
         float: Fisher price index.
     """
-    laspeyres = laspeyres_index(prices_0, prices_t, quantities_0)
-    paasche = paasche_index(prices_0, prices_t, quantities_t)
+    laspeyres = laspeyres_index(prices_0, prices_t, quantities_0, normalization_value)
+    paasche = paasche_index(prices_0, prices_t, quantities_t, normalization_value)
 
     return sqrt(laspeyres * paasche)
 
@@ -225,6 +244,7 @@ def tornqvist_index(
     prices_t: Dict[str, float],
     quantities_0: Dict[str, float],
     quantities_t: Dict[str, float],
+    normalization_value: float = 100,
 ) -> float:
     """
     Calculate the Törnqvist price index.
@@ -234,6 +254,7 @@ def tornqvist_index(
         prices_t (Dict[str, float]): Prices of products at time t.
         quantities_0 (Dict[str, float]): Quantities of products at time 0.
         quantities_t (Dict[str, float]): Quantities of products at time t.
+        normalization_value (float): The value to normalize the index to. Defaults to 100.
 
     Returns:
         float: Törnqvist price index.
@@ -265,7 +286,7 @@ def tornqvist_index(
         for product_id in matched_products
     )
 
-    return exp(log_index)
+    return exp(log_index) * normalization_value
 
 
 def walsh_index(
@@ -273,6 +294,7 @@ def walsh_index(
     prices_t: Dict[str, float],
     quantities_0: Dict[str, float],
     quantities_t: Dict[str, float],
+    normalization_value: float = 100,
 ) -> float:
     """
     Calculate the Walsh price index.
@@ -282,6 +304,7 @@ def walsh_index(
         prices_t (Dict[str, float]): Prices of products at time t.
         quantities_0 (Dict[str, float]): Quantities of products at time 0.
         quantities_t (Dict[str, float]): Quantities of products at time t.
+        normalization_value (float): The value to normalize the index to. Defaults to 100.
 
     Returns:
         float: Walsh price index.
@@ -305,7 +328,7 @@ def walsh_index(
         for product_id in matched_products
     )
 
-    return numerator / denominator
+    return (numerator / denominator) * normalization_value
 
 
 def sato_vartia_index(
@@ -313,6 +336,7 @@ def sato_vartia_index(
     prices_t: Dict[str, float],
     quantities_0: Dict[str, float],
     quantities_t: Dict[str, float],
+    normalization_value: float = 100,
 ) -> float:
     """
     Calculate the Sato-Vartia price index.
@@ -322,6 +346,7 @@ def sato_vartia_index(
         prices_t (Dict[str, float]): Prices of products at time t.
         quantities_0 (Dict[str, float]): Quantities of products at time 0.
         quantities_t (Dict[str, float]): Quantities of products at time t.
+        normalization_value (float): The value to normalize the index to. Defaults to 100.
 
     Returns:
         float: Sato-Vartia price index.
@@ -361,4 +386,4 @@ def sato_vartia_index(
         phi[product_id] /= denominator
         numerator += phi[product_id] * log(prices_t[product_id] / prices_0[product_id])
 
-    return exp(numerator)
+    return exp(numerator) * normalization_value
