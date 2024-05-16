@@ -27,7 +27,8 @@ tbd...
 
 ## Documentation
 
-The full documentation is available [here](https://roman91DE.github.io/price-indices/).
+The full documentation is available [here](https://roman91de.github.io/price_indices/).
+
 
 
 ## License
