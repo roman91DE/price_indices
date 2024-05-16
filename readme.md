@@ -22,13 +22,8 @@ This package provides functions to calculate various price indices, including bo
 
 ## Installation
 
-To install the package, you can use the following command:
+tbd...
 
-```bash
-pip install price_indices
-```
-
-## Documentation
 
 ## Documentation
 
