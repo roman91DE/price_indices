@@ -1,84 +1,82 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Price Index Methods
+# # Price Indices Package
 
-"""
-Price Indices Package
-
-This package provides functions to calculate various price indices, including
-both unweighted and weighted methods. The package includes native Python
-implementations as well as pandas DataFrame-based implementations for flexible
-data handling.
-
-Unweighted Methods:
-- Jevons Index
-- Dutot Index
-- Carli Index
-- Balk-Mehrhoff-Walsh (BMW) Index
-
-Weighted Methods:
-- Laspeyres Index
-- Paasche Index
-- Fisher Index
-- Törnqvist Index
-- Walsh Index
-- Sato-Vartia Index
-
-The native Python functions calculate price indices using dictionaries for
-input data, while the pandas functions work directly with DataFrames and
-support specifying base and compared time periods for computing the indices.
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program. If not, see <https://www.gnu.org/licenses/>.
-
-Constants:
-- PD_DEFAULT_PRICE_COL: Default column name for prices in DataFrame.
-- PD_DEFAULT_PRODUCT_ID_COL: Default column name for product IDs in DataFrame.
-- PD_DEFAULT_QUANTITY_COL: Default column name for quantities in DataFrame.
-- PD_DEFAULT_TIME_PERIOD_COL: Default column name for time periods in DataFrame.
-- DEFAULT_NORMALIZATION_VAL: Default normalization value for indices.
-
-Functions:
-Unweighted Methods (Native Python):
-- jevons_index
-- dutot_index
-- carli_index
-- bmw_index
-
-Unweighted Methods (pandas DataFrame):
-- jevons_index_from_df
-- dutot_index_from_df
-- carli_index_from_df
-- bmw_index_from_df
-
-Weighted Methods (Native Python):
-- laspeyres_index
-- paasche_index
-- fisher_index
-- tornqvist_index
-- walsh_index
-- sato_vartia_index
-
-Weighted Methods (pandas DataFrame):
-- laspeyres_index_from_df
-- paasche_index_from_df
-- fisher_index_from_df
-- tornqvist_index_from_df
-- walsh_index_from_df
-- sato_vartia_index_from_df
-"""
-
+# This package provides functions to calculate various price indices, including
+# both unweighted and weighted methods. The package includes native Python
+# implementations as well as pandas DataFrame-based implementations for flexible
+# data handling.
+#
+# Unweighted Methods:
+# - Jevons Index
+# - Dutot Index
+# - Carli Index
+# - Balk-Mehrhoff-Walsh (BMW) Index
+#
+# Weighted Methods:
+# - Laspeyres Index
+# - Paasche Index
+# - Fisher Index
+# - Törnqvist Index
+# - Walsh Index
+# - Sato-Vartia Index
+#
+# The native Python functions calculate price indices using dictionaries for
+# input data, while the pandas functions work directly with DataFrames and
+# support specifying base and compared time periods for computing the indices.
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+#
+#
+# Constants:
+# - PD_DEFAULT_PRICE_COL: Default column name for prices in DataFrame.
+# - PD_DEFAULT_PRODUCT_ID_COL: Default column name for product IDs in DataFrame.
+# - PD_DEFAULT_QUANTITY_COL: Default column name for quantities in DataFrame.
+# - PD_DEFAULT_TIME_PERIOD_COL: Default column name for time periods in DataFrame.
+# - DEFAULT_NORMALIZATION_VAL: Default normalization value for indices.
+#
+#
+# Functions:
+# Unweighted Methods (Native Python):
+# - jevons_index
+# - dutot_index
+# - carli_index
+# - bmw_index
+#
+# Unweighted Methods (pandas DataFrame):
+# - jevons_index_from_df
+# - dutot_index_from_df
+# - carli_index_from_df
+# - bmw_index_from_df
+#
+# Weighted Methods (Native Python):
+# - laspeyres_index
+# - paasche_index
+# - fisher_index
+# - tornqvist_index
+# - walsh_index
+# - sato_vartia_index
+#
+# Weighted Methods (pandas DataFrame):
+# - laspeyres_index_from_df
+# - paasche_index_from_df
+# - fisher_index_from_df
+# - tornqvist_index_from_df
+# - walsh_index_from_df
+# - sato_vartia_index_from_df
+#
 
 # ## Dependencies
 
