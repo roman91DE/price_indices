@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>price_indices.price_indices &mdash; price_indices 0.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=10f1778b"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            price_indices
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Price Indices Package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">price_indices</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">price_indices.price_indices</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for price_indices.price_indices</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># coding: utf-8</span>
+
+<span class="c1"># # Price Index Methods</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Price Indices Package</span>
+
+<span class="sd">This package provides functions to calculate various price indices, including</span>
+<span class="sd">both unweighted and weighted methods. The package includes native Python</span>
+<span class="sd">implementations as well as pandas DataFrame-based implementations for flexible</span>
+<span class="sd">data handling.</span>
+
+<span class="sd">Unweighted Methods:</span>
+<span class="sd">- Jevons Index</span>
+<span class="sd">- Dutot Index</span>
+<span class="sd">- Carli Index</span>
+<span class="sd">- Balk-Mehrhoff-Walsh (BMW) Index</span>
+
+<span class="sd">Weighted Methods:</span>
+<span class="sd">- Laspeyres Index</span>
+<span class="sd">- Paasche Index</span>
+<span class="sd">- Fisher Index</span>
+<span class="sd">- Törnqvist Index</span>
+<span class="sd">- Walsh Index</span>
+<span class="sd">- Sato-Vartia Index</span>
+
+<span class="sd">The native Python functions calculate price indices using dictionaries for</span>
+<span class="sd">input data, while the pandas functions work directly with DataFrames and</span>
+<span class="sd">support specifying base and compared time periods for computing the indices.</span>
+
+<span class="sd">This program is free software: you can redistribute it and/or modify</span>
+<span class="sd">it under the terms of the GNU General Public License as published by</span>
+<span class="sd">the Free Software Foundation, either version 3 of the License, or</span>
+<span class="sd">(at your option) any later version.</span>
+
+<span class="sd">This program is distributed in the hope that it will be useful,</span>
+<span class="sd">but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="sd">MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the</span>
+<span class="sd">GNU General Public License for more details.</span>
+
+<span class="sd">You should have received a copy of the GNU General Public License</span>
+<span class="sd">along with this program. If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+
+<span class="sd">Constants:</span>
+<span class="sd">- _PD_DEFAULT_PRICE_COL: Default column name for prices in DataFrame.</span>
+<span class="sd">- PD_DEFAULT_PRODUCT_ID_COL: Default column name for product IDs in DataFrame.</span>
+<span class="sd">- _PD_DEFAULT_QUANTITY_COL: Default column name for quantities in DataFrame.</span>
+<span class="sd">- _PD_DEFAULT_TIME_PERIOD_COL: Default column name for time periods in DataFrame.</span>
+<span class="sd">- _DEFAULT_NORMALIZATION_VAL: Default normalization value for indices.</span>
+
+<span class="sd">Functions:</span>
+<span class="sd">Unweighted Methods (Native Python):</span>
+<span class="sd">- jevons_index</span>
+<span class="sd">- dutot_index</span>
+<span class="sd">- carli_index</span>
+<span class="sd">- bmw_index</span>
+
+<span class="sd">Unweighted Methods (pandas DataFrame):</span>
+<span class="sd">- jevons_index_from_df</span>
+<span class="sd">- dutot_index_from_df</span>
+<span class="sd">- carli_index_from_df</span>
+<span class="sd">- bmw_index_from_df</span>
+
+<span class="sd">Weighted Methods (Native Python):</span>
+<span class="sd">- laspeyres_index</span>
+<span class="sd">- paasche_index</span>
+<span class="sd">- fisher_index</span>
+<span class="sd">- tornqvist_index</span>
+<span class="sd">- walsh_index</span>
+<span class="sd">- sato_vartia_index</span>
+
+<span class="sd">Weighted Methods (pandas DataFrame):</span>
+<span class="sd">- laspeyres_index_from_df</span>
+<span class="sd">- paasche_index_from_df</span>
+<span class="sd">- fisher_index_from_df</span>
+<span class="sd">- tornqvist_index_from_df</span>
+<span class="sd">- walsh_index_from_df</span>
+<span class="sd">- sato_vartia_index_from_df</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="c1"># ## Dependencies</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">log</span><span class="p">,</span> <span class="n">exp</span>
+
+
+<span class="c1"># ## Module Constants</span>
+
+<span class="n">PD_DEFAULT_PRICE_COL</span> <span class="o">=</span> <span class="s2">&quot;price&quot;</span>
+<span class="n">PD_DEFAULT_PRODUCT_ID_COL</span> <span class="o">=</span> <span class="s2">&quot;product_id&quot;</span>
+<span class="n">PD_DEFAULT_QUANTITY_COL</span> <span class="o">=</span> <span class="s2">&quot;quantity&quot;</span>
+<span class="n">PD_DEFAULT_TIME_PERIOD_COL</span> <span class="o">=</span> <span class="s2">&quot;time_period&quot;</span>
+<span class="n">DEFAULT_NORMALIZATION_VAL</span> <span class="o">=</span> <span class="mf">100.0</span>
+
+
+<span class="c1"># # Price Indices</span>
+<span class="c1">#</span>
+<span class="c1"># ## Bilateral Methods</span>
+<span class="c1">#</span>
+<span class="c1"># ### Unweighted Methods</span>
+<span class="c1">#</span>
+
+
+<div class="viewcode-block" id="jevons_index">
+<a class="viewcode-back" href="../../modules.html#price_indices.price_indices.jevons_index">[docs]</a>
+<span class="k">def</span> <span class="nf">jevons_index</span><span class="p">(</span>
+    <span class="n">prices_0</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">prices_t</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">normalization_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_NORMALIZATION_VAL</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the Jevons price index.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        prices_0 (Dict[str, float]): Prices of products at the base time period.</span>
+<span class="sd">        prices_t (Dict[str, float]): Prices of products at the compared time period.</span>
+<span class="sd">        normalization_value (float): The value to normalize the index to. Defaults to 100.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Jevons price index.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no matched products are found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">matched_products</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">prices_0</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">prices_t</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">matched_products</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No matched products found.&quot;</span><span class="p">)</span>
+
+    <span class="n">product</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="k">for</span> <span class="n">product_id</span> <span class="ow">in</span> <span class="n">matched_products</span><span class="p">:</span>
+        <span class="n">product</span> <span class="o">*=</span> <span class="p">(</span><span class="n">prices_t</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span> <span class="o">/</span> <span class="n">prices_0</span><span class="p">[</span><span class="n">product_id</span><span class="p">])</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">product</span> <span class="o">*</span> <span class="n">normalization_value</span></div>
+
+
+
+<div class="viewcode-block" id="jevons_index_from_df">
+<a class="viewcode-back" href="../../modules.html#price_indices.price_indices.jevons_index_from_df">[docs]</a>
+<span class="k">def</span> <span class="nf">jevons_index_from_df</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">base_period</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">compared_period</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">price_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_PRICE_COL</span><span class="p">,</span>
+    <span class="n">product_id_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_PRODUCT_ID_COL</span><span class="p">,</span>
+    <span class="n">time_period_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_TIME_PERIOD_COL</span><span class="p">,</span>
+    <span class="n">normalization_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_NORMALIZATION_VAL</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the Jevons price index from a pandas.DataFrame.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df (pd.DataFrame): The DataFrame containing the price data.</span>
+<span class="sd">        base_period (int): The base time period.</span>
+<span class="sd">        compared_period (int): The compared time period.</span>
+<span class="sd">        price_col (str): The name of the column containing the prices. Defaults to &#39;price&#39;.</span>
+<span class="sd">        product_id_col (str): The name of the column containing the product IDs. Defaults to &#39;product_id&#39;.</span>
+<span class="sd">        time_period_col (str): The name of the column containing the time periods. Defaults to &#39;time_period&#39;.</span>
+<span class="sd">        normalization_value (float): The value to normalize the index to. Defaults to 100.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Jevons price index.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no matched products are found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">required_columns</span> <span class="o">=</span> <span class="p">{</span><span class="n">price_col</span><span class="p">,</span> <span class="n">product_id_col</span><span class="p">,</span> <span class="n">time_period_col</span><span class="p">}</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">required_columns</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;DataFrame does not contain the necessary columns: </span><span class="si">{</span><span class="n">required_columns</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">prices_0</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">time_period_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">base_period</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">product_id_col</span><span class="p">)[</span>
+        <span class="n">price_col</span>
+    <span class="p">]</span>
+    <span class="n">prices_t</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">time_period_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">compared_period</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">product_id_col</span><span class="p">)[</span>
+        <span class="n">price_col</span>
+    <span class="p">]</span>
+
+    <span class="n">matched_products</span> <span class="o">=</span> <span class="n">prices_0</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">prices_t</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">matched_products</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No matched products found.&quot;</span><span class="p">)</span>
+
+    <span class="n">ratios</span> <span class="o">=</span> <span class="n">prices_t</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">]</span> <span class="o">/</span> <span class="n">prices_0</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">]</span>
+    <span class="n">geometric_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ratios</span><span class="p">)))</span>
+
+    <span class="k">return</span> <span class="n">geometric_mean</span> <span class="o">*</span> <span class="n">normalization_value</span></div>
+
+
+
+<div class="viewcode-block" id="dutot_index">
+<a class="viewcode-back" href="../../modules.html#price_indices.price_indices.dutot_index">[docs]</a>
+<span class="k">def</span> <span class="nf">dutot_index</span><span class="p">(</span>
+    <span class="n">prices_0</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">prices_t</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">normalization_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_NORMALIZATION_VAL</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the Dutot price index.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        prices_0 (Dict[str, float]): Prices of products at the base time period.</span>
+<span class="sd">        prices_t (Dict[str, float]): Prices of products at the compared time period.</span>
+<span class="sd">        normalization_value (float): The value to normalize the index to. Defaults to 100.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Dutot price index.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no matched products are found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">matched_products</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">prices_0</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">prices_t</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">matched_products</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No matched products found.&quot;</span><span class="p">)</span>
+
+    <span class="n">sum_prices_0</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">prices_0</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span> <span class="k">for</span> <span class="n">product_id</span> <span class="ow">in</span> <span class="n">matched_products</span><span class="p">)</span>
+    <span class="n">sum_prices_t</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">prices_t</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span> <span class="k">for</span> <span class="n">product_id</span> <span class="ow">in</span> <span class="n">matched_products</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">sum_prices_t</span> <span class="o">/</span> <span class="n">sum_prices_0</span><span class="p">)</span> <span class="o">*</span> <span class="n">normalization_value</span></div>
+
+
+
+<div class="viewcode-block" id="dutot_index_from_df">
+<a class="viewcode-back" href="../../modules.html#price_indices.price_indices.dutot_index_from_df">[docs]</a>
+<span class="k">def</span> <span class="nf">dutot_index_from_df</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">base_period</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">compared_period</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">price_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_PRICE_COL</span><span class="p">,</span>
+    <span class="n">product_id_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_PRODUCT_ID_COL</span><span class="p">,</span>
+    <span class="n">time_period_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_TIME_PERIOD_COL</span><span class="p">,</span>
+    <span class="n">normalization_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_NORMALIZATION_VAL</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the Dutot price index from a pandas.DataFrame.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df (pd.DataFrame): The DataFrame containing the price data.</span>
+<span class="sd">        base_period (int): The base time period.</span>
+<span class="sd">        compared_period (int): The compared time period.</span>
+<span class="sd">        price_col (str): The name of the column containing the prices. Defaults to &#39;price&#39;.</span>
+<span class="sd">        product_id_col (str): The name of the column containing the product IDs. Defaults to &#39;product_id&#39;.</span>
+<span class="sd">        time_period_col (str): The name of the column containing the time periods. Defaults to &#39;time_period&#39;.</span>
+<span class="sd">        normalization_value (float): The value to normalize the index to. Defaults to 100.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Dutot price index.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no matched products are found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">prices_0</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">time_period_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">base_period</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">product_id_col</span><span class="p">)[</span>
+        <span class="n">price_col</span>
+    <span class="p">]</span>
+    <span class="n">prices_t</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">time_period_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">compared_period</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">product_id_col</span><span class="p">)[</span>
+        <span class="n">price_col</span>
+    <span class="p">]</span>
+
+    <span class="n">matched_products</span> <span class="o">=</span> <span class="n">prices_0</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">prices_t</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">matched_products</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No matched products found.&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">prices_t</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">prices_0</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="p">)</span> <span class="o">*</span> <span class="n">normalization_value</span></div>
+
+
+
+<div class="viewcode-block" id="carli_index">
+<a class="viewcode-back" href="../../modules.html#price_indices.price_indices.carli_index">[docs]</a>
+<span class="k">def</span> <span class="nf">carli_index</span><span class="p">(</span>
+    <span class="n">prices_0</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">prices_t</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">normalization_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_NORMALIZATION_VAL</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the Carli price index.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        prices_0 (Dict[str, float]): Prices of products at the base time period.</span>
+<span class="sd">        prices_t (Dict[str, float]): Prices of products at the compared time period.</span>
+<span class="sd">        normalization_value (float): The value to normalize the index to. Defaults to 100.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Carli price index.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no matched products are found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">matched_products</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">prices_0</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">prices_t</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">matched_products</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No matched products found.&quot;</span><span class="p">)</span>
+
+    <span class="n">sum_relatives</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+        <span class="n">prices_t</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span> <span class="o">/</span> <span class="n">prices_0</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span> <span class="k">for</span> <span class="n">product_id</span> <span class="ow">in</span> <span class="n">matched_products</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">sum_relatives</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="n">normalization_value</span></div>
+
+
+
+<div class="viewcode-block" id="carli_index_from_df">
+<a class="viewcode-back" href="../../modules.html#price_indices.price_indices.carli_index_from_df">[docs]</a>
+<span class="k">def</span> <span class="nf">carli_index_from_df</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">base_period</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">compared_period</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">price_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_PRICE_COL</span><span class="p">,</span>
+    <span class="n">product_id_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_PRODUCT_ID_COL</span><span class="p">,</span>
+    <span class="n">time_period_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_TIME_PERIOD_COL</span><span class="p">,</span>
+    <span class="n">normalization_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_NORMALIZATION_VAL</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the Carli price index from a pandas.DataFrame.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df (pd.DataFrame): The DataFrame containing the price data.</span>
+<span class="sd">        base_period (int): The base time period.</span>
+<span class="sd">        compared_period (int): The compared time period.</span>
+<span class="sd">        price_col (str): The name of the column containing the prices. Defaults to &#39;price&#39;.</span>
+<span class="sd">        product_id_col (str): The name of the column containing the product IDs. Defaults to &#39;product_id&#39;.</span>
+<span class="sd">        time_period_col (str): The name of the column containing the time periods. Defaults to &#39;time_period&#39;.</span>
+<span class="sd">        normalization_value (float): The value to normalize the index to. Defaults to 100.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Carli price index.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no matched products are found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">required_columns</span> <span class="o">=</span> <span class="p">{</span><span class="n">price_col</span><span class="p">,</span> <span class="n">product_id_col</span><span class="p">,</span> <span class="n">time_period_col</span><span class="p">}</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">required_columns</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;DataFrame does not contain the necessary columns: </span><span class="si">{</span><span class="n">required_columns</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">prices_0</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">time_period_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">base_period</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">product_id_col</span><span class="p">)[</span>
+        <span class="n">price_col</span>
+    <span class="p">]</span>
+    <span class="n">prices_t</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">time_period_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">compared_period</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">product_id_col</span><span class="p">)[</span>
+        <span class="n">price_col</span>
+    <span class="p">]</span>
+
+    <span class="n">matched_products</span> <span class="o">=</span> <span class="n">prices_0</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">prices_t</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">matched_products</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No matched products found.&quot;</span><span class="p">)</span>
+
+    <span class="n">relatives</span> <span class="o">=</span> <span class="n">prices_t</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">]</span> <span class="o">/</span> <span class="n">prices_0</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">]</span>
+    <span class="n">arithmetic_mean</span> <span class="o">=</span> <span class="n">relatives</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">arithmetic_mean</span> <span class="o">*</span> <span class="n">normalization_value</span></div>
+
+
+
+<div class="viewcode-block" id="bmw_index">
+<a class="viewcode-back" href="../../modules.html#price_indices.price_indices.bmw_index">[docs]</a>
+<span class="k">def</span> <span class="nf">bmw_index</span><span class="p">(</span>
+    <span class="n">prices_0</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">prices_t</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">normalization_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_NORMALIZATION_VAL</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the Balk-Mehrhoff-Walsh (BMW) price index.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        prices_0 (Dict[str, float]): Prices of products at the base time period.</span>
+<span class="sd">        prices_t (Dict[str, float]): Prices of products at the compared time period.</span>
+<span class="sd">        normalization_value (float): The value to normalize the index to. Defaults to 100.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: BMW price index.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no matched products are found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">matched_products</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">prices_0</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">prices_t</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">matched_products</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No matched products found.&quot;</span><span class="p">)</span>
+
+    <span class="n">numerator</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">denominator</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="k">for</span> <span class="n">product_id</span> <span class="ow">in</span> <span class="n">matched_products</span><span class="p">:</span>
+        <span class="n">price_0</span> <span class="o">=</span> <span class="n">prices_0</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span>
+        <span class="n">price_t</span> <span class="o">=</span> <span class="n">prices_t</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span>
+        <span class="n">price_ratio</span> <span class="o">=</span> <span class="n">price_t</span> <span class="o">/</span> <span class="n">price_0</span>
+        <span class="n">weight</span> <span class="o">=</span> <span class="p">(</span><span class="n">price_0</span> <span class="o">/</span> <span class="n">price_t</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span>
+
+        <span class="n">numerator</span> <span class="o">+=</span> <span class="n">price_ratio</span> <span class="o">*</span> <span class="n">weight</span>
+        <span class="n">denominator</span> <span class="o">+=</span> <span class="n">weight</span>
+
+    <span class="k">if</span> <span class="n">denominator</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Denominator is zero, cannot compute BMW index.&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">numerator</span> <span class="o">/</span> <span class="n">denominator</span><span class="p">)</span> <span class="o">*</span> <span class="n">normalization_value</span></div>
+
+
+
+<div class="viewcode-block" id="bmw_index_from_df">
+<a class="viewcode-back" href="../../modules.html#price_indices.price_indices.bmw_index_from_df">[docs]</a>
+<span class="k">def</span> <span class="nf">bmw_index_from_df</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">base_period</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">compared_period</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">price_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_PRICE_COL</span><span class="p">,</span>
+    <span class="n">product_id_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_PRODUCT_ID_COL</span><span class="p">,</span>
+    <span class="n">time_period_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_TIME_PERIOD_COL</span><span class="p">,</span>
+    <span class="n">normalization_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_NORMALIZATION_VAL</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the Balk-Mehrhoff-Walsh (BMW) price index from a pandas.DataFrame.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df (pd.DataFrame): The DataFrame containing the price data.</span>
+<span class="sd">        base_period (int): The base time period.</span>
+<span class="sd">        compared_period (int): The compared time period.</span>
+<span class="sd">        price_col (str): The name of the column containing the prices. Defaults to &#39;price&#39;.</span>
+<span class="sd">        product_id_col (str): The name of the column containing the product IDs. Defaults to &#39;product_id&#39;.</span>
+<span class="sd">        time_period_col (str): The name of the column containing the time periods. Defaults to &#39;time_period&#39;.</span>
+<span class="sd">        normalization_value (float): The value to normalize the index to. Defaults to 100.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: BMW price index.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no matched products are found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">required_columns</span> <span class="o">=</span> <span class="p">{</span><span class="n">price_col</span><span class="p">,</span> <span class="n">product_id_col</span><span class="p">,</span> <span class="n">time_period_col</span><span class="p">}</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">required_columns</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;DataFrame does not contain the necessary columns: </span><span class="si">{</span><span class="n">required_columns</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">prices_0</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">time_period_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">base_period</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">product_id_col</span><span class="p">)[</span>
+        <span class="n">price_col</span>
+    <span class="p">]</span>
+    <span class="n">prices_t</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">time_period_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">compared_period</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">product_id_col</span><span class="p">)[</span>
+        <span class="n">price_col</span>
+    <span class="p">]</span>
+
+    <span class="n">matched_products</span> <span class="o">=</span> <span class="n">prices_0</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">prices_t</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">matched_products</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No matched products found.&quot;</span><span class="p">)</span>
+
+    <span class="n">price_ratios</span> <span class="o">=</span> <span class="n">prices_t</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">]</span> <span class="o">/</span> <span class="n">prices_0</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">]</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">prices_0</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">]</span> <span class="o">/</span> <span class="n">prices_t</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">])</span>
+
+    <span class="n">numerator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">price_ratios</span> <span class="o">*</span> <span class="n">weights</span><span class="p">)</span>
+    <span class="n">denominator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">denominator</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Denominator is zero, cannot compute BMW index.&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">numerator</span> <span class="o">/</span> <span class="n">denominator</span><span class="p">)</span> <span class="o">*</span> <span class="n">normalization_value</span></div>
+
+
+
+<span class="c1"># ### Weighted Methods</span>
+
+
+<div class="viewcode-block" id="laspeyres_index">
+<a class="viewcode-back" href="../../modules.html#price_indices.price_indices.laspeyres_index">[docs]</a>
+<span class="k">def</span> <span class="nf">laspeyres_index</span><span class="p">(</span>
+    <span class="n">prices_0</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">prices_t</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">quantities_0</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">normalization_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_NORMALIZATION_VAL</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the Laspeyres price index.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        prices_0 (Dict[str, float]): Prices of products at the base time period.</span>
+<span class="sd">        prices_t (Dict[str, float]): Prices of products at the compared time period.</span>
+<span class="sd">        quantities_0 (Dict[str, float]): Quantities of products at the base time period.</span>
+<span class="sd">        normalization_value (float): The value to normalize the index to. Defaults to 100.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Laspeyres price index.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no matched products are found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">matched_products</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="nb">set</span><span class="p">(</span><span class="n">prices_0</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">prices_t</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">quantities_0</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">matched_products</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No matched products found.&quot;</span><span class="p">)</span>
+
+    <span class="n">numerator</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+        <span class="n">quantities_0</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span> <span class="o">*</span> <span class="n">prices_t</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">product_id</span> <span class="ow">in</span> <span class="n">matched_products</span>
+    <span class="p">)</span>
+    <span class="n">denominator</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+        <span class="n">quantities_0</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span> <span class="o">*</span> <span class="n">prices_0</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">product_id</span> <span class="ow">in</span> <span class="n">matched_products</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">numerator</span> <span class="o">/</span> <span class="n">denominator</span><span class="p">)</span> <span class="o">*</span> <span class="n">normalization_value</span></div>
+
+
+
+<div class="viewcode-block" id="laspeyres_index_from_df">
+<a class="viewcode-back" href="../../modules.html#price_indices.price_indices.laspeyres_index_from_df">[docs]</a>
+<span class="k">def</span> <span class="nf">laspeyres_index_from_df</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">base_period</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">compared_period</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">price_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_PRICE_COL</span><span class="p">,</span>
+    <span class="n">quantity_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_QUANTITY_COL</span><span class="p">,</span>
+    <span class="n">product_id_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_PRODUCT_ID_COL</span><span class="p">,</span>
+    <span class="n">time_period_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_TIME_PERIOD_COL</span><span class="p">,</span>
+    <span class="n">normalization_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_NORMALIZATION_VAL</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the Laspeyres price index from a pandas.DataFrame.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df (pd.DataFrame): The DataFrame containing the price and quantity data.</span>
+<span class="sd">        base_period (int): The base time period.</span>
+<span class="sd">        compared_period (int): The compared time period.</span>
+<span class="sd">        price_col (str): The name of the column containing the prices. Defaults to &#39;price&#39;.</span>
+<span class="sd">        quantity_col (str): The name of the column containing the quantities. Defaults to &#39;quantity&#39;.</span>
+<span class="sd">        product_id_col (str): The name of the column containing the product IDs. Defaults to &#39;product_id&#39;.</span>
+<span class="sd">        time_period_col (str): The name of the column containing the time periods. Defaults to &#39;time_period&#39;.</span>
+<span class="sd">        normalization_value (float): The value to normalize the index to. Defaults to 100.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Laspeyres price index.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no matched products are found.</span>
+<span class="sd">        AttributeError: If the DataFrame does not contain the necessary columns.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">required_columns</span> <span class="o">=</span> <span class="p">{</span><span class="n">price_col</span><span class="p">,</span> <span class="n">quantity_col</span><span class="p">,</span> <span class="n">product_id_col</span><span class="p">,</span> <span class="n">time_period_col</span><span class="p">}</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">required_columns</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;DataFrame does not contain the necessary columns: </span><span class="si">{</span><span class="n">required_columns</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">prices_0</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">time_period_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">base_period</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">product_id_col</span><span class="p">)[</span>
+        <span class="n">price_col</span>
+    <span class="p">]</span>
+    <span class="n">prices_t</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">time_period_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">compared_period</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">product_id_col</span><span class="p">)[</span>
+        <span class="n">price_col</span>
+    <span class="p">]</span>
+    <span class="n">quantities_0</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">time_period_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">base_period</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">product_id_col</span><span class="p">)[</span>
+        <span class="n">quantity_col</span>
+    <span class="p">]</span>
+
+    <span class="n">matched_products</span> <span class="o">=</span> <span class="n">prices_0</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">prices_t</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span>
+        <span class="n">quantities_0</span><span class="o">.</span><span class="n">index</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">matched_products</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No matched products are found.&quot;</span><span class="p">)</span>
+
+    <span class="n">numerator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
+        <span class="n">quantities_0</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">]</span> <span class="o">*</span> <span class="n">prices_t</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">denominator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
+        <span class="n">quantities_0</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">]</span> <span class="o">*</span> <span class="n">prices_0</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">numerator</span> <span class="o">/</span> <span class="n">denominator</span><span class="p">)</span> <span class="o">*</span> <span class="n">normalization_value</span></div>
+
+
+
+<div class="viewcode-block" id="paasche_index">
+<a class="viewcode-back" href="../../modules.html#price_indices.price_indices.paasche_index">[docs]</a>
+<span class="k">def</span> <span class="nf">paasche_index</span><span class="p">(</span>
+    <span class="n">prices_0</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">prices_t</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">quantities_t</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">normalization_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_NORMALIZATION_VAL</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the Paasche price index.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        prices_0 (Dict[str, float]): Prices of products at the base time period.</span>
+<span class="sd">        prices_t (Dict[str, float]): Prices of products at the compared time period.</span>
+<span class="sd">        quantities_t (Dict[str, float]): Quantities of products at the compared time period.</span>
+<span class="sd">        normalization_value (float): The value to normalize the index to. Defaults to 100.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Paasche price index.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no matched products are found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">matched_products</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="nb">set</span><span class="p">(</span><span class="n">prices_0</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">prices_t</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">quantities_t</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">matched_products</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No matched products found.&quot;</span><span class="p">)</span>
+
+    <span class="n">numerator</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+        <span class="n">quantities_t</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span> <span class="o">*</span> <span class="n">prices_t</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">product_id</span> <span class="ow">in</span> <span class="n">matched_products</span>
+    <span class="p">)</span>
+    <span class="n">denominator</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+        <span class="n">quantities_t</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span> <span class="o">*</span> <span class="n">prices_0</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">product_id</span> <span class="ow">in</span> <span class="n">matched_products</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">numerator</span> <span class="o">/</span> <span class="n">denominator</span><span class="p">)</span> <span class="o">*</span> <span class="n">normalization_value</span></div>
+
+
+
+<div class="viewcode-block" id="paasche_index_from_df">
+<a class="viewcode-back" href="../../modules.html#price_indices.price_indices.paasche_index_from_df">[docs]</a>
+<span class="k">def</span> <span class="nf">paasche_index_from_df</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">base_period</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">compared_period</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">price_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_PRICE_COL</span><span class="p">,</span>
+    <span class="n">quantity_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_QUANTITY_COL</span><span class="p">,</span>
+    <span class="n">product_id_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_PRODUCT_ID_COL</span><span class="p">,</span>
+    <span class="n">time_period_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_TIME_PERIOD_COL</span><span class="p">,</span>
+    <span class="n">normalization_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_NORMALIZATION_VAL</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the Paasche price index from a pandas.DataFrame.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df (pd.DataFrame): The DataFrame containing the price and quantity data.</span>
+<span class="sd">        base_period (int): The base time period.</span>
+<span class="sd">        compared_period (int): The compared time period.</span>
+<span class="sd">        price_col (str): The name of the column containing the prices. Defaults to &#39;price&#39;.</span>
+<span class="sd">        quantity_col (str): The name of the column containing the quantities. Defaults to &#39;quantity&#39;.</span>
+<span class="sd">        product_id_col (str): The name of the column containing the product IDs. Defaults to &#39;product_id&#39;.</span>
+<span class="sd">        time_period_col (str): The name of the column containing the time periods. Defaults to &#39;time_period&#39;.</span>
+<span class="sd">        normalization_value (float): The value to normalize the index to. Defaults to 100.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Paasche price index.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no matched products are found.</span>
+<span class="sd">        AttributeError: If the DataFrame does not contain the necessary columns.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">required_columns</span> <span class="o">=</span> <span class="p">{</span><span class="n">price_col</span><span class="p">,</span> <span class="n">quantity_col</span><span class="p">,</span> <span class="n">product_id_col</span><span class="p">,</span> <span class="n">time_period_col</span><span class="p">}</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">required_columns</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;DataFrame does not contain the necessary columns: </span><span class="si">{</span><span class="n">required_columns</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">prices_0</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">time_period_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">base_period</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">product_id_col</span><span class="p">)[</span>
+        <span class="n">price_col</span>
+    <span class="p">]</span>
+    <span class="n">prices_t</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">time_period_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">compared_period</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">product_id_col</span><span class="p">)[</span>
+        <span class="n">price_col</span>
+    <span class="p">]</span>
+    <span class="n">quantities_t</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">time_period_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">compared_period</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">product_id_col</span><span class="p">)[</span>
+        <span class="n">quantity_col</span>
+    <span class="p">]</span>
+
+    <span class="n">matched_products</span> <span class="o">=</span> <span class="n">prices_0</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">prices_t</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span>
+        <span class="n">quantities_t</span><span class="o">.</span><span class="n">index</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">matched_products</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No matched products are found.&quot;</span><span class="p">)</span>
+
+    <span class="n">numerator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
+        <span class="n">quantities_t</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">]</span> <span class="o">*</span> <span class="n">prices_t</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">denominator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
+        <span class="n">quantities_t</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">]</span> <span class="o">*</span> <span class="n">prices_0</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">numerator</span> <span class="o">/</span> <span class="n">denominator</span><span class="p">)</span> <span class="o">*</span> <span class="n">normalization_value</span></div>
+
+
+
+<div class="viewcode-block" id="fisher_index">
+<a class="viewcode-back" href="../../modules.html#price_indices.price_indices.fisher_index">[docs]</a>
+<span class="k">def</span> <span class="nf">fisher_index</span><span class="p">(</span>
+    <span class="n">prices_0</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">prices_t</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">quantities_0</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">quantities_t</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">normalization_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_NORMALIZATION_VAL</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the Fisher price index.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        prices_0 (Dict[str, float]): Prices of products at the base time period.</span>
+<span class="sd">        prices_t (Dict[str, float]): Prices of products at the compared time period.</span>
+<span class="sd">        quantities_0 (Dict[str, float]): Quantities of products at the base time period.</span>
+<span class="sd">        quantities_t (Dict[str, float]): Quantities of products at the compared time period.</span>
+<span class="sd">        normalization_value (float): The value to normalize the index to. Defaults to 100.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Fisher price index.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no matched products are found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">laspeyres</span> <span class="o">=</span> <span class="n">laspeyres_index</span><span class="p">(</span><span class="n">prices_0</span><span class="p">,</span> <span class="n">prices_t</span><span class="p">,</span> <span class="n">quantities_0</span><span class="p">,</span> <span class="n">normalization_value</span><span class="p">)</span>
+    <span class="n">paasche</span> <span class="o">=</span> <span class="n">paasche_index</span><span class="p">(</span><span class="n">prices_0</span><span class="p">,</span> <span class="n">prices_t</span><span class="p">,</span> <span class="n">quantities_t</span><span class="p">,</span> <span class="n">normalization_value</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">laspeyres</span> <span class="o">*</span> <span class="n">paasche</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="fisher_index_from_df">
+<a class="viewcode-back" href="../../modules.html#price_indices.price_indices.fisher_index_from_df">[docs]</a>
+<span class="k">def</span> <span class="nf">fisher_index_from_df</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">base_period</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">compared_period</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">price_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_PRICE_COL</span><span class="p">,</span>
+    <span class="n">quantity_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_QUANTITY_COL</span><span class="p">,</span>
+    <span class="n">product_id_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_PRODUCT_ID_COL</span><span class="p">,</span>
+    <span class="n">time_period_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_TIME_PERIOD_COL</span><span class="p">,</span>
+    <span class="n">normalization_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_NORMALIZATION_VAL</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the Fisher price index from a pandas.DataFrame.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df (pd.DataFrame): The DataFrame containing the price and quantity data.</span>
+<span class="sd">        base_period (int): The base time period.</span>
+<span class="sd">        compared_period (int): The compared time period.</span>
+<span class="sd">        price_col (str): The name of the column containing the prices. Defaults to &#39;price&#39;.</span>
+<span class="sd">        quantity_col (str): The name of the column containing the quantities. Defaults to &#39;quantity&#39;.</span>
+<span class="sd">        product_id_col (str): The name of the column containing the product IDs. Defaults to &#39;product_id&#39;.</span>
+<span class="sd">        time_period_col (str): The name of the column containing the time periods. Defaults to &#39;time_period&#39;.</span>
+<span class="sd">        normalization_value (float): The value to normalize the index to. Defaults to 100.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Fisher price index.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no matched products are found.</span>
+<span class="sd">        AttributeError: If the DataFrame does not contain the necessary columns.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">laspeyres</span> <span class="o">=</span> <span class="n">laspeyres_index_from_df</span><span class="p">(</span>
+        <span class="n">df</span><span class="p">,</span>
+        <span class="n">base_period</span><span class="p">,</span>
+        <span class="n">compared_period</span><span class="p">,</span>
+        <span class="n">price_col</span><span class="p">,</span>
+        <span class="n">quantity_col</span><span class="p">,</span>
+        <span class="n">product_id_col</span><span class="p">,</span>
+        <span class="n">time_period_col</span><span class="p">,</span>
+        <span class="n">normalization_value</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">paasche</span> <span class="o">=</span> <span class="n">paasche_index_from_df</span><span class="p">(</span>
+        <span class="n">df</span><span class="p">,</span>
+        <span class="n">base_period</span><span class="p">,</span>
+        <span class="n">compared_period</span><span class="p">,</span>
+        <span class="n">price_col</span><span class="p">,</span>
+        <span class="n">quantity_col</span><span class="p">,</span>
+        <span class="n">product_id_col</span><span class="p">,</span>
+        <span class="n">time_period_col</span><span class="p">,</span>
+        <span class="n">normalization_value</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">laspeyres</span> <span class="o">*</span> <span class="n">paasche</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="tornqvist_index">
+<a class="viewcode-back" href="../../modules.html#price_indices.price_indices.tornqvist_index">[docs]</a>
+<span class="k">def</span> <span class="nf">tornqvist_index</span><span class="p">(</span>
+    <span class="n">prices_0</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">prices_t</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">quantities_0</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">quantities_t</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">normalization_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_NORMALIZATION_VAL</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the Törnqvist price index.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        prices_0 (Dict[str, float]): Prices of products at the base time period.</span>
+<span class="sd">        prices_t (Dict[str, float]): Prices of products at the compared time period.</span>
+<span class="sd">        quantities_0 (Dict[str, float]): Quantities of products at the base time period.</span>
+<span class="sd">        quantities_t (Dict[str, float]): Quantities of products at the compared time period.</span>
+<span class="sd">        normalization_value (float): The value to normalize the index to. Defaults to 100.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Törnqvist price index.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no matched products are found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">matched_products</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="nb">set</span><span class="p">(</span><span class="n">prices_0</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">prices_t</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">quantities_0</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">quantities_t</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">matched_products</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No matched products found.&quot;</span><span class="p">)</span>
+
+    <span class="n">s_0</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">product_id</span><span class="p">:</span> <span class="p">(</span><span class="n">prices_0</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span> <span class="o">*</span> <span class="n">quantities_0</span><span class="p">[</span><span class="n">product_id</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">product_id</span> <span class="ow">in</span> <span class="n">matched_products</span>
+    <span class="p">}</span>
+    <span class="n">s_t</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">product_id</span><span class="p">:</span> <span class="p">(</span><span class="n">prices_t</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span> <span class="o">*</span> <span class="n">quantities_t</span><span class="p">[</span><span class="n">product_id</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">product_id</span> <span class="ow">in</span> <span class="n">matched_products</span>
+    <span class="p">}</span>
+    <span class="n">total_0</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">s_0</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="n">total_t</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">s_t</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+    <span class="n">log_index</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+        <span class="p">((</span><span class="n">s_0</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span> <span class="o">/</span> <span class="n">total_0</span> <span class="o">+</span> <span class="n">s_t</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span> <span class="o">/</span> <span class="n">total_t</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="o">*</span> <span class="n">log</span><span class="p">(</span><span class="n">prices_t</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span> <span class="o">/</span> <span class="n">prices_0</span><span class="p">[</span><span class="n">product_id</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">product_id</span> <span class="ow">in</span> <span class="n">matched_products</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">exp</span><span class="p">(</span><span class="n">log_index</span><span class="p">)</span> <span class="o">*</span> <span class="n">normalization_value</span></div>
+
+
+
+<div class="viewcode-block" id="tornqvist_index_from_df">
+<a class="viewcode-back" href="../../modules.html#price_indices.price_indices.tornqvist_index_from_df">[docs]</a>
+<span class="k">def</span> <span class="nf">tornqvist_index_from_df</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">base_period</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">compared_period</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">price_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_PRICE_COL</span><span class="p">,</span>
+    <span class="n">quantity_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_QUANTITY_COL</span><span class="p">,</span>
+    <span class="n">product_id_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_PRODUCT_ID_COL</span><span class="p">,</span>
+    <span class="n">time_period_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_TIME_PERIOD_COL</span><span class="p">,</span>
+    <span class="n">normalization_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_NORMALIZATION_VAL</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the Törnqvist price index from a pandas.DataFrame.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df (pd.DataFrame): The DataFrame containing the price and quantity data.</span>
+<span class="sd">        base_period (int): The base time period.</span>
+<span class="sd">        compared_period (int): The compared time period.</span>
+<span class="sd">        price_col (str): The name of the column containing the prices. Defaults to &#39;price&#39;.</span>
+<span class="sd">        quantity_col (str): The name of the column containing the quantities. Defaults to &#39;quantity&#39;.</span>
+<span class="sd">        product_id_col (str): The name of the column containing the product IDs. Defaults to &#39;product_id&#39;.</span>
+<span class="sd">        time_period_col (str): The name of the column containing the time periods. Defaults to &#39;time_period&#39;.</span>
+<span class="sd">        normalization_value (float): The value to normalize the index to. Defaults to 100.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Törnqvist price index.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no matched products are found.</span>
+<span class="sd">        AttributeError: If the DataFrame does not contain the necessary columns.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">required_columns</span> <span class="o">=</span> <span class="p">{</span><span class="n">price_col</span><span class="p">,</span> <span class="n">quantity_col</span><span class="p">,</span> <span class="n">product_id_col</span><span class="p">,</span> <span class="n">time_period_col</span><span class="p">}</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">required_columns</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;DataFrame does not contain the necessary columns: </span><span class="si">{</span><span class="n">required_columns</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">prices_0</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">time_period_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">base_period</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">product_id_col</span><span class="p">)[</span>
+        <span class="n">price_col</span>
+    <span class="p">]</span>
+    <span class="n">prices_t</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">time_period_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">compared_period</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">product_id_col</span><span class="p">)[</span>
+        <span class="n">price_col</span>
+    <span class="p">]</span>
+    <span class="n">quantities_0</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">time_period_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">base_period</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">product_id_col</span><span class="p">)[</span>
+        <span class="n">quantity_col</span>
+    <span class="p">]</span>
+    <span class="n">quantities_t</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">time_period_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">compared_period</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">product_id_col</span><span class="p">)[</span>
+        <span class="n">quantity_col</span>
+    <span class="p">]</span>
+
+    <span class="n">matched_products</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">prices_0</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">prices_t</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">quantities_0</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">quantities_t</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">matched_products</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No matched products are found.&quot;</span><span class="p">)</span>
+
+    <span class="n">s_0</span> <span class="o">=</span> <span class="n">prices_0</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">]</span> <span class="o">*</span> <span class="n">quantities_0</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">]</span>
+    <span class="n">s_t</span> <span class="o">=</span> <span class="n">prices_t</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">]</span> <span class="o">*</span> <span class="n">quantities_t</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">]</span>
+    <span class="n">total_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">s_0</span><span class="p">)</span>
+    <span class="n">total_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">s_t</span><span class="p">)</span>
+
+    <span class="n">log_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
+        <span class="p">((</span><span class="n">s_0</span> <span class="o">/</span> <span class="n">total_0</span> <span class="o">+</span> <span class="n">s_t</span> <span class="o">/</span> <span class="n">total_t</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">prices_t</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">]</span> <span class="o">/</span> <span class="n">prices_0</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">])</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_index</span><span class="p">)</span> <span class="o">*</span> <span class="n">normalization_value</span></div>
+
+
+
+<div class="viewcode-block" id="walsh_index">
+<a class="viewcode-back" href="../../modules.html#price_indices.price_indices.walsh_index">[docs]</a>
+<span class="k">def</span> <span class="nf">walsh_index</span><span class="p">(</span>
+    <span class="n">prices_0</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">prices_t</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">quantities_0</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">quantities_t</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">normalization_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_NORMALIZATION_VAL</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the Walsh price index.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        prices_0 (Dict[str, float]): Prices of products at the base time period.</span>
+<span class="sd">        prices_t (Dict[str, float]): Prices of products at the compared time period.</span>
+<span class="sd">        quantities_0 (Dict[str, float]): Quantities of products at the base time period.</span>
+<span class="sd">        quantities_t (Dict[str, float]): Quantities of products at the compared time period.</span>
+<span class="sd">        normalization_value (float): The value to normalize the index to. Defaults to 100.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Walsh price index.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no matched products are found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">matched_products</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="nb">set</span><span class="p">(</span><span class="n">prices_0</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">prices_t</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">quantities_0</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">quantities_t</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">matched_products</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No matched products found.&quot;</span><span class="p">)</span>
+
+    <span class="n">numerator</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+        <span class="n">sqrt</span><span class="p">(</span><span class="n">quantities_0</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span> <span class="o">*</span> <span class="n">quantities_t</span><span class="p">[</span><span class="n">product_id</span><span class="p">])</span> <span class="o">*</span> <span class="n">prices_t</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">product_id</span> <span class="ow">in</span> <span class="n">matched_products</span>
+    <span class="p">)</span>
+    <span class="n">denominator</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+        <span class="n">sqrt</span><span class="p">(</span><span class="n">quantities_0</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span> <span class="o">*</span> <span class="n">quantities_t</span><span class="p">[</span><span class="n">product_id</span><span class="p">])</span> <span class="o">*</span> <span class="n">prices_0</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">product_id</span> <span class="ow">in</span> <span class="n">matched_products</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">numerator</span> <span class="o">/</span> <span class="n">denominator</span><span class="p">)</span> <span class="o">*</span> <span class="n">normalization_value</span></div>
+
+
+
+<div class="viewcode-block" id="walsh_index_from_df">
+<a class="viewcode-back" href="../../modules.html#price_indices.price_indices.walsh_index_from_df">[docs]</a>
+<span class="k">def</span> <span class="nf">walsh_index_from_df</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">base_period</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">compared_period</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">price_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_PRICE_COL</span><span class="p">,</span>
+    <span class="n">quantity_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_QUANTITY_COL</span><span class="p">,</span>
+    <span class="n">product_id_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_PRODUCT_ID_COL</span><span class="p">,</span>
+    <span class="n">time_period_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_TIME_PERIOD_COL</span><span class="p">,</span>
+    <span class="n">normalization_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_NORMALIZATION_VAL</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the Walsh price index from a pandas.DataFrame.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df (pd.DataFrame): The DataFrame containing the price and quantity data.</span>
+<span class="sd">        base_period (int): The base time period.</span>
+<span class="sd">        compared_period (int): The compared time period.</span>
+<span class="sd">        price_col (str): The name of the column containing the prices. Defaults to &#39;price&#39;.</span>
+<span class="sd">        quantity_col (str): The name of the column containing the quantities. Defaults to &#39;quantity&#39;.</span>
+<span class="sd">        product_id_col (str): The name of the column containing the product IDs. Defaults to &#39;product_id&#39;.</span>
+<span class="sd">        time_period_col (str): The name of the column containing the time periods. Defaults to &#39;time_period&#39;.</span>
+<span class="sd">        normalization_value (float): The value to normalize the index to. Defaults to 100.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Walsh price index.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no matched products are found.</span>
+<span class="sd">        AttributeError: If the DataFrame does not contain the necessary columns.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">required_columns</span> <span class="o">=</span> <span class="p">{</span><span class="n">price_col</span><span class="p">,</span> <span class="n">quantity_col</span><span class="p">,</span> <span class="n">product_id_col</span><span class="p">,</span> <span class="n">time_period_col</span><span class="p">}</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">required_columns</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;DataFrame does not contain the necessary columns: </span><span class="si">{</span><span class="n">required_columns</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">prices_0</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">time_period_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">base_period</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">product_id_col</span><span class="p">)[</span>
+        <span class="n">price_col</span>
+    <span class="p">]</span>
+    <span class="n">prices_t</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">time_period_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">compared_period</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">product_id_col</span><span class="p">)[</span>
+        <span class="n">price_col</span>
+    <span class="p">]</span>
+    <span class="n">quantities_0</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">time_period_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">base_period</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">product_id_col</span><span class="p">)[</span>
+        <span class="n">quantity_col</span>
+    <span class="p">]</span>
+    <span class="n">quantities_t</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">time_period_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">compared_period</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">product_id_col</span><span class="p">)[</span>
+        <span class="n">quantity_col</span>
+    <span class="p">]</span>
+
+    <span class="n">matched_products</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">prices_0</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">prices_t</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">quantities_0</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">quantities_t</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">matched_products</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No matched products are found.&quot;</span><span class="p">)</span>
+
+    <span class="n">sqrt_quantities_0_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
+        <span class="n">quantities_0</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">]</span> <span class="o">*</span> <span class="n">quantities_t</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="n">numerator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sqrt_quantities_0_t</span> <span class="o">*</span> <span class="n">prices_t</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">])</span>
+    <span class="n">denominator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sqrt_quantities_0_t</span> <span class="o">*</span> <span class="n">prices_0</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">numerator</span> <span class="o">/</span> <span class="n">denominator</span><span class="p">)</span> <span class="o">*</span> <span class="n">normalization_value</span></div>
+
+
+
+<div class="viewcode-block" id="sato_vartia_index">
+<a class="viewcode-back" href="../../modules.html#price_indices.price_indices.sato_vartia_index">[docs]</a>
+<span class="k">def</span> <span class="nf">sato_vartia_index</span><span class="p">(</span>
+    <span class="n">prices_0</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">prices_t</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">quantities_0</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">quantities_t</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">normalization_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_NORMALIZATION_VAL</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the Sato-Vartia price index.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        prices_0 (Dict[str, float]): Prices of products at the base time period.</span>
+<span class="sd">        prices_t (Dict[str, float]): Prices of products at the compared time period.</span>
+<span class="sd">        quantities_0 (Dict[str, float]): Quantities of products at the base time period.</span>
+<span class="sd">        quantities_t (Dict[str, float]): Quantities of products at the compared time period.</span>
+<span class="sd">        normalization_value (float): The value to normalize the index to. Defaults to 100.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Sato-Vartia price index.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no matched products are found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">matched_products</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="nb">set</span><span class="p">(</span><span class="n">prices_0</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">prices_t</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">quantities_0</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">quantities_t</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">matched_products</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No matched products found.&quot;</span><span class="p">)</span>
+
+    <span class="n">s_0</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">product_id</span><span class="p">:</span> <span class="p">(</span><span class="n">prices_0</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span> <span class="o">*</span> <span class="n">quantities_0</span><span class="p">[</span><span class="n">product_id</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">product_id</span> <span class="ow">in</span> <span class="n">matched_products</span>
+    <span class="p">}</span>
+    <span class="n">s_t</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">product_id</span><span class="p">:</span> <span class="p">(</span><span class="n">prices_t</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span> <span class="o">*</span> <span class="n">quantities_t</span><span class="p">[</span><span class="n">product_id</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">product_id</span> <span class="ow">in</span> <span class="n">matched_products</span>
+    <span class="p">}</span>
+    <span class="n">total_0</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">s_0</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="n">total_t</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">s_t</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+    <span class="n">phi</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">numerator</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">denominator</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="k">for</span> <span class="n">product_id</span> <span class="ow">in</span> <span class="n">matched_products</span><span class="p">:</span>
+        <span class="n">s0</span> <span class="o">=</span> <span class="n">s_0</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span> <span class="o">/</span> <span class="n">total_0</span>
+        <span class="n">st</span> <span class="o">=</span> <span class="n">s_t</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span> <span class="o">/</span> <span class="n">total_t</span>
+        <span class="n">phi</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">st</span> <span class="o">-</span> <span class="n">s0</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">st</span><span class="p">)</span> <span class="o">-</span> <span class="n">log</span><span class="p">(</span><span class="n">s0</span><span class="p">))</span>
+        <span class="n">denominator</span> <span class="o">+=</span> <span class="n">phi</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">product_id</span> <span class="ow">in</span> <span class="n">matched_products</span><span class="p">:</span>
+        <span class="n">phi</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span> <span class="o">/=</span> <span class="n">denominator</span>
+        <span class="n">numerator</span> <span class="o">+=</span> <span class="n">phi</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span> <span class="o">*</span> <span class="n">log</span><span class="p">(</span><span class="n">prices_t</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span> <span class="o">/</span> <span class="n">prices_0</span><span class="p">[</span><span class="n">product_id</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">exp</span><span class="p">(</span><span class="n">numerator</span><span class="p">)</span> <span class="o">*</span> <span class="n">normalization_value</span></div>
+
+
+
+<div class="viewcode-block" id="sato_vartia_index_from_df">
+<a class="viewcode-back" href="../../modules.html#price_indices.price_indices.sato_vartia_index_from_df">[docs]</a>
+<span class="k">def</span> <span class="nf">sato_vartia_index_from_df</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">base_period</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">compared_period</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">price_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_PRICE_COL</span><span class="p">,</span>
+    <span class="n">quantity_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_QUANTITY_COL</span><span class="p">,</span>
+    <span class="n">product_id_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_PRODUCT_ID_COL</span><span class="p">,</span>
+    <span class="n">time_period_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_TIME_PERIOD_COL</span><span class="p">,</span>
+    <span class="n">normalization_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_NORMALIZATION_VAL</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the Sato-Vartia price index from a pandas.DataFrame.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df (pd.DataFrame): The DataFrame containing the price and quantity data.</span>
+<span class="sd">        base_period (int): The base time period.</span>
+<span class="sd">        compared_period (int): The compared time period.</span>
+<span class="sd">        price_col (str): The name of the column containing the prices. Defaults to &#39;price&#39;.</span>
+<span class="sd">        quantity_col (str): The name of the column containing the quantities. Defaults to &#39;quantity&#39;.</span>
+<span class="sd">        product_id_col (str): The name of the column containing the product IDs. Defaults to &#39;product_id&#39;.</span>
+<span class="sd">        time_period_col (str): The name of the column containing the time periods. Defaults to &#39;time_period&#39;.</span>
+<span class="sd">        normalization_value (float): The value to normalize the index to. Defaults to 100.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Sato-Vartia price index.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no matched products are found.</span>
+<span class="sd">        AttributeError: If the DataFrame does not contain the necessary columns.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">required_columns</span> <span class="o">=</span> <span class="p">{</span><span class="n">price_col</span><span class="p">,</span> <span class="n">quantity_col</span><span class="p">,</span> <span class="n">product_id_col</span><span class="p">,</span> <span class="n">time_period_col</span><span class="p">}</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">required_columns</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;DataFrame does not contain the necessary columns: </span><span class="si">{</span><span class="n">required_columns</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">prices_0</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">time_period_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">base_period</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">product_id_col</span><span class="p">)[</span>
+        <span class="n">price_col</span>
+    <span class="p">]</span>
+    <span class="n">prices_t</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">time_period_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">compared_period</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">product_id_col</span><span class="p">)[</span>
+        <span class="n">price_col</span>
+    <span class="p">]</span>
+    <span class="n">quantities_0</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">time_period_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">base_period</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">product_id_col</span><span class="p">)[</span>
+        <span class="n">quantity_col</span>
+    <span class="p">]</span>
+    <span class="n">quantities_t</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">time_period_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">compared_period</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">product_id_col</span><span class="p">)[</span>
+        <span class="n">quantity_col</span>
+    <span class="p">]</span>
+
+    <span class="n">matched_products</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">prices_0</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">prices_t</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">quantities_0</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">quantities_t</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">matched_products</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No matched products are found.&quot;</span><span class="p">)</span>
+
+    <span class="n">s_0</span> <span class="o">=</span> <span class="n">prices_0</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">]</span> <span class="o">*</span> <span class="n">quantities_0</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">]</span>
+    <span class="n">s_t</span> <span class="o">=</span> <span class="n">prices_t</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">]</span> <span class="o">*</span> <span class="n">quantities_t</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">]</span>
+    <span class="n">total_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">s_0</span><span class="p">)</span>
+    <span class="n">total_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">s_t</span><span class="p">)</span>
+
+    <span class="n">s0</span> <span class="o">=</span> <span class="n">s_0</span> <span class="o">/</span> <span class="n">total_0</span>
+    <span class="n">st</span> <span class="o">=</span> <span class="n">s_t</span> <span class="o">/</span> <span class="n">total_t</span>
+
+    <span class="n">phi</span> <span class="o">=</span> <span class="p">(</span><span class="n">st</span> <span class="o">-</span> <span class="n">s0</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">st</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">s0</span><span class="p">))</span>
+    <span class="n">phi</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span>
+
+    <span class="n">log_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
+        <span class="n">phi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">prices_t</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">]</span> <span class="o">/</span> <span class="n">prices_0</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">])</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_index</span><span class="p">)</span> <span class="o">*</span> <span class="n">normalization_value</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Roman Hoehn.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
