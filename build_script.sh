@@ -38,10 +38,7 @@ cd "$CUR_DIR" || exit
 echo -e "Building Sphinx Documentation\n---"
 make html
 
-rm -rf docs
-mkdir docs
-cp -r build/html/* docs/
-
+rm docs
 ln -s build/html docs
 
 touch docs/.nojekyll 
