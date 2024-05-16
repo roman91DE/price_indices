@@ -72,7 +72,8 @@ def jevons_index(
     .. math::
         P_{J}^{0, t} = \left(\prod_{i \in I} \left(\frac{p_{i}^{t}}{p_{i}^{0}}\right)\right)^{\frac{1}{n}}
 
-    where :math:`p_{i}^{0}` and :math:`p_{i}^{t}` are the prices of product :math:`i` at the base and compared
+    Where:
+    :math:`p_{i}^{0}` and :math:`p_{i}^{t}` are the prices of product :math:`i` at the base and compared
     time periods respectively, and :math:`n` is the number of matched products.
 
     Args:
@@ -86,9 +87,8 @@ def jevons_index(
     Raises:
         ValueError: If no matched products are found.
     """
-
     matched_products = set(prices_0.keys()) & set(prices_t.keys())
-    n = len(matched_products)
+    n = count(matched_products)
 
     if n == 0:
         raise ValueError("No matched products found.")
