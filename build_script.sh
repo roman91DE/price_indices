@@ -44,4 +44,7 @@ cp -r build/html/* docs/
 
 ln -s build/html docs
 
-git add * ; git commit -m "Executed CI Script" ; git push
+touch docs/.nojekyll 
+git add docs/.nojekyll ; git commit -m "Disable Jekyll processing"
+
+git add * ; git commit -m "Executed CI Script" ; git  push origin main
