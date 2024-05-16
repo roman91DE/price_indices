@@ -36,10 +36,13 @@ done
 
 cd "$CUR_DIR" || exit
 echo -e "Building Sphinx Documentation\n---"
-make html
+
+sphinx-build -b html sphinx-source/ docs/   
+
+# make html
+touch docs/.nojekyll 
 
 
-touch docs/html/.nojekyll 
 git add docs/.nojekyll ; git commit -m "Disable Jekyll processing"
 
 git add * ; git commit -m "Executed CI Script" ; git  push origin main
