@@ -1,46 +1,114 @@
 <!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<html lang="en" data-content_root="./">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Price Indices Package &mdash; price_indices 0.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
-    <title>Price Indices Package &#8212; price_indices 0.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=def86cc0" />
-    
-    <script src="_static/documentation_options.js?v=10f1778b"></script>
-    <script src="_static/doctools.js?v=9a2dae69"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=10f1778b"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Welcome to Price Indices Package’s documentation!" href="index.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="index.html" title="Welcome to Price Indices Package’s documentation!"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">price_indices 0.2 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Price Indices Package</a></li> 
-      </ul>
-    </div>  
+</head>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            price_indices
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Price Indices Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#price_indices.price_indices.DEFAULT_NORMALIZATION_VAL"><code class="docutils literal notranslate"><span class="pre">DEFAULT_NORMALIZATION_VAL</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#price_indices.price_indices.PD_DEFAULT_PRICE_COL"><code class="docutils literal notranslate"><span class="pre">PD_DEFAULT_PRICE_COL</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#price_indices.price_indices.PD_DEFAULT_PRODUCT_ID_COL"><code class="docutils literal notranslate"><span class="pre">PD_DEFAULT_PRODUCT_ID_COL</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#price_indices.price_indices.PD_DEFAULT_QUANTITY_COL"><code class="docutils literal notranslate"><span class="pre">PD_DEFAULT_QUANTITY_COL</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#price_indices.price_indices.PD_DEFAULT_TIME_PERIOD_COL"><code class="docutils literal notranslate"><span class="pre">PD_DEFAULT_TIME_PERIOD_COL</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#price_indices.price_indices.bmw_index"><code class="docutils literal notranslate"><span class="pre">bmw_index()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#price_indices.price_indices.bmw_index_from_df"><code class="docutils literal notranslate"><span class="pre">bmw_index_from_df()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#price_indices.price_indices.carli_index"><code class="docutils literal notranslate"><span class="pre">carli_index()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#price_indices.price_indices.carli_index_from_df"><code class="docutils literal notranslate"><span class="pre">carli_index_from_df()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#price_indices.price_indices.dutot_index"><code class="docutils literal notranslate"><span class="pre">dutot_index()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#price_indices.price_indices.dutot_index_from_df"><code class="docutils literal notranslate"><span class="pre">dutot_index_from_df()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#price_indices.price_indices.fisher_index"><code class="docutils literal notranslate"><span class="pre">fisher_index()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#price_indices.price_indices.fisher_index_from_df"><code class="docutils literal notranslate"><span class="pre">fisher_index_from_df()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#price_indices.price_indices.jevons_index"><code class="docutils literal notranslate"><span class="pre">jevons_index()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#price_indices.price_indices.jevons_index_from_df"><code class="docutils literal notranslate"><span class="pre">jevons_index_from_df()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#price_indices.price_indices.laspeyres_index"><code class="docutils literal notranslate"><span class="pre">laspeyres_index()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#price_indices.price_indices.laspeyres_index_from_df"><code class="docutils literal notranslate"><span class="pre">laspeyres_index_from_df()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#price_indices.price_indices.paasche_index"><code class="docutils literal notranslate"><span class="pre">paasche_index()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#price_indices.price_indices.paasche_index_from_df"><code class="docutils literal notranslate"><span class="pre">paasche_index_from_df()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#price_indices.price_indices.sato_vartia_index"><code class="docutils literal notranslate"><span class="pre">sato_vartia_index()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#price_indices.price_indices.sato_vartia_index_from_df"><code class="docutils literal notranslate"><span class="pre">sato_vartia_index_from_df()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#price_indices.price_indices.tornqvist_index"><code class="docutils literal notranslate"><span class="pre">tornqvist_index()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#price_indices.price_indices.tornqvist_index_from_df"><code class="docutils literal notranslate"><span class="pre">tornqvist_index_from_df()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#price_indices.price_indices.walsh_index"><code class="docutils literal notranslate"><span class="pre">walsh_index()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#price_indices.price_indices.walsh_index_from_df"><code class="docutils literal notranslate"><span class="pre">walsh_index_from_df()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#constants">Constants</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">price_indices.PD_DEFAULT_PRICE_COL</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1"><code class="docutils literal notranslate"><span class="pre">price_indices.PD_DEFAULT_PRODUCT_ID_COL</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2"><code class="docutils literal notranslate"><span class="pre">price_indices.PD_DEFAULT_QUANTITY_COL</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3"><code class="docutils literal notranslate"><span class="pre">price_indices.PD_DEFAULT_TIME_PERIOD_COL</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4"><code class="docutils literal notranslate"><span class="pre">price_indices.DEFAULT_NORMALIZATION_VAL</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">price_indices</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Price Indices Package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/modules.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <section id="module-price_indices.price_indices">
-<span id="price-indices-package"></span><h1>Price Indices Package<a class="headerlink" href="#module-price_indices.price_indices" title="Link to this heading">¶</a></h1>
+<span id="price-indices-package"></span><h1>Price Indices Package<a class="headerlink" href="#module-price_indices.price_indices" title="Link to this heading"></a></h1>
 <p>Price Indices Package</p>
 <p>This package provides functions to calculate various price indices, including
 both unweighted and weighted methods. The package includes native Python
@@ -104,37 +172,37 @@ Unweighted Methods (Native Python):
 - sato_vartia_index_from_df</p>
 <dl class="py data">
 <dt class="sig sig-object py" id="price_indices.price_indices.DEFAULT_NORMALIZATION_VAL">
-<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">DEFAULT_NORMALIZATION_VAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">100.0</span></em><a class="headerlink" href="#price_indices.price_indices.DEFAULT_NORMALIZATION_VAL" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">DEFAULT_NORMALIZATION_VAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">100.0</span></em><a class="headerlink" href="#price_indices.price_indices.DEFAULT_NORMALIZATION_VAL" title="Link to this definition"></a></dt>
 <dd><p>Default normalization value for indices.</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="price_indices.price_indices.PD_DEFAULT_PRICE_COL">
-<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">PD_DEFAULT_PRICE_COL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'price'</span></em><a class="headerlink" href="#price_indices.price_indices.PD_DEFAULT_PRICE_COL" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">PD_DEFAULT_PRICE_COL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'price'</span></em><a class="headerlink" href="#price_indices.price_indices.PD_DEFAULT_PRICE_COL" title="Link to this definition"></a></dt>
 <dd><p>Default column name for prices in DataFrame.</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="price_indices.price_indices.PD_DEFAULT_PRODUCT_ID_COL">
-<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">PD_DEFAULT_PRODUCT_ID_COL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'product_id'</span></em><a class="headerlink" href="#price_indices.price_indices.PD_DEFAULT_PRODUCT_ID_COL" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">PD_DEFAULT_PRODUCT_ID_COL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'product_id'</span></em><a class="headerlink" href="#price_indices.price_indices.PD_DEFAULT_PRODUCT_ID_COL" title="Link to this definition"></a></dt>
 <dd><p>Default column name for product IDs in DataFrame.</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="price_indices.price_indices.PD_DEFAULT_QUANTITY_COL">
-<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">PD_DEFAULT_QUANTITY_COL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'quantity'</span></em><a class="headerlink" href="#price_indices.price_indices.PD_DEFAULT_QUANTITY_COL" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">PD_DEFAULT_QUANTITY_COL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'quantity'</span></em><a class="headerlink" href="#price_indices.price_indices.PD_DEFAULT_QUANTITY_COL" title="Link to this definition"></a></dt>
 <dd><p>Default column name for quantities in DataFrame.</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="price_indices.price_indices.PD_DEFAULT_TIME_PERIOD_COL">
-<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">PD_DEFAULT_TIME_PERIOD_COL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'time_period'</span></em><a class="headerlink" href="#price_indices.price_indices.PD_DEFAULT_TIME_PERIOD_COL" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">PD_DEFAULT_TIME_PERIOD_COL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'time_period'</span></em><a class="headerlink" href="#price_indices.price_indices.PD_DEFAULT_TIME_PERIOD_COL" title="Link to this definition"></a></dt>
 <dd><p>Default column name for time periods in DataFrame.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="price_indices.price_indices.bmw_index">
-<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">bmw_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prices_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prices_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#bmw_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.bmw_index" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">bmw_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prices_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prices_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#bmw_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.bmw_index" title="Link to this definition"></a></dt>
 <dd><p>Calculate the Balk-Mehrhoff-Walsh (BMW) price index.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -158,7 +226,7 @@ Unweighted Methods (Native Python):
 
 <dl class="py function">
 <dt class="sig sig-object py" id="price_indices.price_indices.bmw_index_from_df">
-<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">bmw_index_from_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compared_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'price'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">product_id_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'product_id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_period_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'time_period'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#bmw_index_from_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.bmw_index_from_df" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">bmw_index_from_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compared_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'price'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">product_id_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'product_id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_period_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'time_period'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#bmw_index_from_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.bmw_index_from_df" title="Link to this definition"></a></dt>
 <dd><p>Calculate the Balk-Mehrhoff-Walsh (BMW) price index from a pandas.DataFrame.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -186,7 +254,7 @@ Unweighted Methods (Native Python):
 
 <dl class="py function">
 <dt class="sig sig-object py" id="price_indices.price_indices.carli_index">
-<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">carli_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prices_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prices_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#carli_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.carli_index" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">carli_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prices_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prices_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#carli_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.carli_index" title="Link to this definition"></a></dt>
 <dd><p>Calculate the Carli price index.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -210,7 +278,7 @@ Unweighted Methods (Native Python):
 
 <dl class="py function">
 <dt class="sig sig-object py" id="price_indices.price_indices.carli_index_from_df">
-<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">carli_index_from_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compared_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'price'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">product_id_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'product_id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_period_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'time_period'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#carli_index_from_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.carli_index_from_df" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">carli_index_from_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compared_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'price'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">product_id_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'product_id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_period_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'time_period'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#carli_index_from_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.carli_index_from_df" title="Link to this definition"></a></dt>
 <dd><p>Calculate the Carli price index from a pandas.DataFrame.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -238,7 +306,7 @@ Unweighted Methods (Native Python):
 
 <dl class="py function">
 <dt class="sig sig-object py" id="price_indices.price_indices.dutot_index">
-<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">dutot_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prices_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prices_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#dutot_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.dutot_index" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">dutot_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prices_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prices_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#dutot_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.dutot_index" title="Link to this definition"></a></dt>
 <dd><p>Calculate the Dutot price index.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -262,7 +330,7 @@ Unweighted Methods (Native Python):
 
 <dl class="py function">
 <dt class="sig sig-object py" id="price_indices.price_indices.dutot_index_from_df">
-<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">dutot_index_from_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compared_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'price'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">product_id_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'product_id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_period_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'time_period'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#dutot_index_from_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.dutot_index_from_df" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">dutot_index_from_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compared_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'price'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">product_id_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'product_id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_period_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'time_period'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#dutot_index_from_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.dutot_index_from_df" title="Link to this definition"></a></dt>
 <dd><p>Calculate the Dutot price index from a pandas.DataFrame.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -290,7 +358,7 @@ Unweighted Methods (Native Python):
 
 <dl class="py function">
 <dt class="sig sig-object py" id="price_indices.price_indices.fisher_index">
-<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">fisher_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prices_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prices_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantities_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantities_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#fisher_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.fisher_index" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">fisher_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prices_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prices_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantities_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantities_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#fisher_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.fisher_index" title="Link to this definition"></a></dt>
 <dd><p>Calculate the Fisher price index.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -316,7 +384,7 @@ Unweighted Methods (Native Python):
 
 <dl class="py function">
 <dt class="sig sig-object py" id="price_indices.price_indices.fisher_index_from_df">
-<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">fisher_index_from_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compared_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'price'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'quantity'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">product_id_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'product_id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_period_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'time_period'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#fisher_index_from_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.fisher_index_from_df" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">fisher_index_from_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compared_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'price'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'quantity'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">product_id_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'product_id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_period_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'time_period'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#fisher_index_from_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.fisher_index_from_df" title="Link to this definition"></a></dt>
 <dd><p>Calculate the Fisher price index from a pandas.DataFrame.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -348,7 +416,7 @@ Unweighted Methods (Native Python):
 
 <dl class="py function">
 <dt class="sig sig-object py" id="price_indices.price_indices.jevons_index">
-<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">jevons_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prices_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prices_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#jevons_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.jevons_index" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">jevons_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prices_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prices_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#jevons_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.jevons_index" title="Link to this definition"></a></dt>
 <dd><p>Calculate the Jevons price index.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -372,7 +440,7 @@ Unweighted Methods (Native Python):
 
 <dl class="py function">
 <dt class="sig sig-object py" id="price_indices.price_indices.jevons_index_from_df">
-<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">jevons_index_from_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compared_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'price'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">product_id_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'product_id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_period_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'time_period'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#jevons_index_from_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.jevons_index_from_df" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">jevons_index_from_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compared_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'price'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">product_id_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'product_id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_period_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'time_period'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#jevons_index_from_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.jevons_index_from_df" title="Link to this definition"></a></dt>
 <dd><p>Calculate the Jevons price index from a pandas.DataFrame.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -400,7 +468,7 @@ Unweighted Methods (Native Python):
 
 <dl class="py function">
 <dt class="sig sig-object py" id="price_indices.price_indices.laspeyres_index">
-<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">laspeyres_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prices_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prices_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantities_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#laspeyres_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.laspeyres_index" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">laspeyres_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prices_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prices_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantities_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#laspeyres_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.laspeyres_index" title="Link to this definition"></a></dt>
 <dd><p>Calculate the Laspeyres price index.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -425,7 +493,7 @@ Unweighted Methods (Native Python):
 
 <dl class="py function">
 <dt class="sig sig-object py" id="price_indices.price_indices.laspeyres_index_from_df">
-<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">laspeyres_index_from_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compared_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'price'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'quantity'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">product_id_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'product_id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_period_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'time_period'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#laspeyres_index_from_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.laspeyres_index_from_df" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">laspeyres_index_from_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compared_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'price'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'quantity'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">product_id_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'product_id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_period_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'time_period'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#laspeyres_index_from_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.laspeyres_index_from_df" title="Link to this definition"></a></dt>
 <dd><p>Calculate the Laspeyres price index from a pandas.DataFrame.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -457,7 +525,7 @@ Unweighted Methods (Native Python):
 
 <dl class="py function">
 <dt class="sig sig-object py" id="price_indices.price_indices.paasche_index">
-<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">paasche_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prices_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prices_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantities_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#paasche_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.paasche_index" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">paasche_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prices_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prices_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantities_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#paasche_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.paasche_index" title="Link to this definition"></a></dt>
 <dd><p>Calculate the Paasche price index.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -482,7 +550,7 @@ Unweighted Methods (Native Python):
 
 <dl class="py function">
 <dt class="sig sig-object py" id="price_indices.price_indices.paasche_index_from_df">
-<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">paasche_index_from_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compared_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'price'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'quantity'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">product_id_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'product_id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_period_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'time_period'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#paasche_index_from_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.paasche_index_from_df" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">paasche_index_from_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compared_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'price'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'quantity'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">product_id_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'product_id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_period_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'time_period'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#paasche_index_from_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.paasche_index_from_df" title="Link to this definition"></a></dt>
 <dd><p>Calculate the Paasche price index from a pandas.DataFrame.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -514,7 +582,7 @@ Unweighted Methods (Native Python):
 
 <dl class="py function">
 <dt class="sig sig-object py" id="price_indices.price_indices.sato_vartia_index">
-<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">sato_vartia_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prices_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prices_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantities_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantities_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#sato_vartia_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.sato_vartia_index" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">sato_vartia_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prices_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prices_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantities_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantities_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#sato_vartia_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.sato_vartia_index" title="Link to this definition"></a></dt>
 <dd><p>Calculate the Sato-Vartia price index.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -540,7 +608,7 @@ Unweighted Methods (Native Python):
 
 <dl class="py function">
 <dt class="sig sig-object py" id="price_indices.price_indices.sato_vartia_index_from_df">
-<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">sato_vartia_index_from_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compared_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'price'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'quantity'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">product_id_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'product_id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_period_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'time_period'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#sato_vartia_index_from_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.sato_vartia_index_from_df" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">sato_vartia_index_from_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compared_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'price'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'quantity'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">product_id_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'product_id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_period_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'time_period'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#sato_vartia_index_from_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.sato_vartia_index_from_df" title="Link to this definition"></a></dt>
 <dd><p>Calculate the Sato-Vartia price index from a pandas.DataFrame.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -572,7 +640,7 @@ Unweighted Methods (Native Python):
 
 <dl class="py function">
 <dt class="sig sig-object py" id="price_indices.price_indices.tornqvist_index">
-<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">tornqvist_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prices_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prices_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantities_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantities_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#tornqvist_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.tornqvist_index" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">tornqvist_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prices_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prices_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantities_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantities_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#tornqvist_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.tornqvist_index" title="Link to this definition"></a></dt>
 <dd><p>Calculate the Törnqvist price index.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -598,7 +666,7 @@ Unweighted Methods (Native Python):
 
 <dl class="py function">
 <dt class="sig sig-object py" id="price_indices.price_indices.tornqvist_index_from_df">
-<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">tornqvist_index_from_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compared_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'price'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'quantity'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">product_id_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'product_id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_period_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'time_period'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#tornqvist_index_from_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.tornqvist_index_from_df" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">tornqvist_index_from_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compared_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'price'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'quantity'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">product_id_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'product_id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_period_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'time_period'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#tornqvist_index_from_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.tornqvist_index_from_df" title="Link to this definition"></a></dt>
 <dd><p>Calculate the Törnqvist price index from a pandas.DataFrame.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -630,7 +698,7 @@ Unweighted Methods (Native Python):
 
 <dl class="py function">
 <dt class="sig sig-object py" id="price_indices.price_indices.walsh_index">
-<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">walsh_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prices_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prices_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantities_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantities_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#walsh_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.walsh_index" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">walsh_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prices_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prices_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantities_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantities_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#walsh_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.walsh_index" title="Link to this definition"></a></dt>
 <dd><p>Calculate the Walsh price index.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -656,7 +724,7 @@ Unweighted Methods (Native Python):
 
 <dl class="py function">
 <dt class="sig sig-object py" id="price_indices.price_indices.walsh_index_from_df">
-<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">walsh_index_from_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compared_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'price'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'quantity'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">product_id_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'product_id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_period_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'time_period'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#walsh_index_from_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.walsh_index_from_df" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">walsh_index_from_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compared_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'price'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'quantity'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">product_id_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'product_id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_period_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'time_period'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#walsh_index_from_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.walsh_index_from_df" title="Link to this definition"></a></dt>
 <dd><p>Calculate the Walsh price index from a pandas.DataFrame.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -688,128 +756,62 @@ Unweighted Methods (Native Python):
 
 </section>
 <section id="constants">
-<h1>Constants<a class="headerlink" href="#constants" title="Link to this heading">¶</a></h1>
+<h1>Constants<a class="headerlink" href="#constants" title="Link to this heading"></a></h1>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="id0">
-<span class="sig-prename descclassname"><span class="pre">price_indices.</span></span><span class="sig-name descname"><span class="pre">PD_DEFAULT_PRICE_COL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'price'</span></em><a class="headerlink" href="#id0" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">price_indices.</span></span><span class="sig-name descname"><span class="pre">PD_DEFAULT_PRICE_COL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'price'</span></em><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="id1">
-<span class="sig-prename descclassname"><span class="pre">price_indices.</span></span><span class="sig-name descname"><span class="pre">PD_DEFAULT_PRODUCT_ID_COL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'product_id'</span></em><a class="headerlink" href="#id1" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">price_indices.</span></span><span class="sig-name descname"><span class="pre">PD_DEFAULT_PRODUCT_ID_COL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'product_id'</span></em><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="id2">
-<span class="sig-prename descclassname"><span class="pre">price_indices.</span></span><span class="sig-name descname"><span class="pre">PD_DEFAULT_QUANTITY_COL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'quantity'</span></em><a class="headerlink" href="#id2" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">price_indices.</span></span><span class="sig-name descname"><span class="pre">PD_DEFAULT_QUANTITY_COL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'quantity'</span></em><a class="headerlink" href="#id2" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="id3">
-<span class="sig-prename descclassname"><span class="pre">price_indices.</span></span><span class="sig-name descname"><span class="pre">PD_DEFAULT_TIME_PERIOD_COL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'time_period'</span></em><a class="headerlink" href="#id3" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">price_indices.</span></span><span class="sig-name descname"><span class="pre">PD_DEFAULT_TIME_PERIOD_COL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'time_period'</span></em><a class="headerlink" href="#id3" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="id4">
-<span class="sig-prename descclassname"><span class="pre">price_indices.</span></span><span class="sig-name descname"><span class="pre">DEFAULT_NORMALIZATION_VAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">100.0</span></em><a class="headerlink" href="#id4" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">price_indices.</span></span><span class="sig-name descname"><span class="pre">DEFAULT_NORMALIZATION_VAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">100.0</span></em><a class="headerlink" href="#id4" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </section>
 
 
-            <div class="clearer"></div>
+           </div>
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <div>
-    <h3><a href="index.html">Table of Contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Price Indices Package</a><ul>
-<li><a class="reference internal" href="#price_indices.price_indices.DEFAULT_NORMALIZATION_VAL"><code class="docutils literal notranslate"><span class="pre">DEFAULT_NORMALIZATION_VAL</span></code></a></li>
-<li><a class="reference internal" href="#price_indices.price_indices.PD_DEFAULT_PRICE_COL"><code class="docutils literal notranslate"><span class="pre">PD_DEFAULT_PRICE_COL</span></code></a></li>
-<li><a class="reference internal" href="#price_indices.price_indices.PD_DEFAULT_PRODUCT_ID_COL"><code class="docutils literal notranslate"><span class="pre">PD_DEFAULT_PRODUCT_ID_COL</span></code></a></li>
-<li><a class="reference internal" href="#price_indices.price_indices.PD_DEFAULT_QUANTITY_COL"><code class="docutils literal notranslate"><span class="pre">PD_DEFAULT_QUANTITY_COL</span></code></a></li>
-<li><a class="reference internal" href="#price_indices.price_indices.PD_DEFAULT_TIME_PERIOD_COL"><code class="docutils literal notranslate"><span class="pre">PD_DEFAULT_TIME_PERIOD_COL</span></code></a></li>
-<li><a class="reference internal" href="#price_indices.price_indices.bmw_index"><code class="docutils literal notranslate"><span class="pre">bmw_index()</span></code></a></li>
-<li><a class="reference internal" href="#price_indices.price_indices.bmw_index_from_df"><code class="docutils literal notranslate"><span class="pre">bmw_index_from_df()</span></code></a></li>
-<li><a class="reference internal" href="#price_indices.price_indices.carli_index"><code class="docutils literal notranslate"><span class="pre">carli_index()</span></code></a></li>
-<li><a class="reference internal" href="#price_indices.price_indices.carli_index_from_df"><code class="docutils literal notranslate"><span class="pre">carli_index_from_df()</span></code></a></li>
-<li><a class="reference internal" href="#price_indices.price_indices.dutot_index"><code class="docutils literal notranslate"><span class="pre">dutot_index()</span></code></a></li>
-<li><a class="reference internal" href="#price_indices.price_indices.dutot_index_from_df"><code class="docutils literal notranslate"><span class="pre">dutot_index_from_df()</span></code></a></li>
-<li><a class="reference internal" href="#price_indices.price_indices.fisher_index"><code class="docutils literal notranslate"><span class="pre">fisher_index()</span></code></a></li>
-<li><a class="reference internal" href="#price_indices.price_indices.fisher_index_from_df"><code class="docutils literal notranslate"><span class="pre">fisher_index_from_df()</span></code></a></li>
-<li><a class="reference internal" href="#price_indices.price_indices.jevons_index"><code class="docutils literal notranslate"><span class="pre">jevons_index()</span></code></a></li>
-<li><a class="reference internal" href="#price_indices.price_indices.jevons_index_from_df"><code class="docutils literal notranslate"><span class="pre">jevons_index_from_df()</span></code></a></li>
-<li><a class="reference internal" href="#price_indices.price_indices.laspeyres_index"><code class="docutils literal notranslate"><span class="pre">laspeyres_index()</span></code></a></li>
-<li><a class="reference internal" href="#price_indices.price_indices.laspeyres_index_from_df"><code class="docutils literal notranslate"><span class="pre">laspeyres_index_from_df()</span></code></a></li>
-<li><a class="reference internal" href="#price_indices.price_indices.paasche_index"><code class="docutils literal notranslate"><span class="pre">paasche_index()</span></code></a></li>
-<li><a class="reference internal" href="#price_indices.price_indices.paasche_index_from_df"><code class="docutils literal notranslate"><span class="pre">paasche_index_from_df()</span></code></a></li>
-<li><a class="reference internal" href="#price_indices.price_indices.sato_vartia_index"><code class="docutils literal notranslate"><span class="pre">sato_vartia_index()</span></code></a></li>
-<li><a class="reference internal" href="#price_indices.price_indices.sato_vartia_index_from_df"><code class="docutils literal notranslate"><span class="pre">sato_vartia_index_from_df()</span></code></a></li>
-<li><a class="reference internal" href="#price_indices.price_indices.tornqvist_index"><code class="docutils literal notranslate"><span class="pre">tornqvist_index()</span></code></a></li>
-<li><a class="reference internal" href="#price_indices.price_indices.tornqvist_index_from_df"><code class="docutils literal notranslate"><span class="pre">tornqvist_index_from_df()</span></code></a></li>
-<li><a class="reference internal" href="#price_indices.price_indices.walsh_index"><code class="docutils literal notranslate"><span class="pre">walsh_index()</span></code></a></li>
-<li><a class="reference internal" href="#price_indices.price_indices.walsh_index_from_df"><code class="docutils literal notranslate"><span class="pre">walsh_index_from_df()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#constants">Constants</a><ul>
-<li><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">price_indices.PD_DEFAULT_PRICE_COL</span></code></a></li>
-<li><a class="reference internal" href="#id1"><code class="docutils literal notranslate"><span class="pre">price_indices.PD_DEFAULT_PRODUCT_ID_COL</span></code></a></li>
-<li><a class="reference internal" href="#id2"><code class="docutils literal notranslate"><span class="pre">price_indices.PD_DEFAULT_QUANTITY_COL</span></code></a></li>
-<li><a class="reference internal" href="#id3"><code class="docutils literal notranslate"><span class="pre">price_indices.PD_DEFAULT_TIME_PERIOD_COL</span></code></a></li>
-<li><a class="reference internal" href="#id4"><code class="docutils literal notranslate"><span class="pre">price_indices.DEFAULT_NORMALIZATION_VAL</span></code></a></li>
-</ul>
-</li>
-</ul>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to Price Indices Package’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Roman Hoehn.</p>
   </div>
-  <div>
-    <h4>Previous topic</h4>
-    <p class="topless"><a href="index.html"
-                          title="previous chapter">Welcome to Price Indices Package’s documentation!</a></p>
-  </div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/modules.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<search id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</search>
-<script>document.getElementById('searchbox').style.display = "block"</script>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="index.html" title="Welcome to Price Indices Package’s documentation!"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">price_indices 0.2 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Price Indices Package</a></li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-    &#169; Copyright 2024, Roman Hoehn.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
-    </div>
-  </body>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>
