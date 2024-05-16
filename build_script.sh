@@ -41,7 +41,7 @@ make html
 rm docs
 ln -s build/html docs
 
-touch docs/.nojekyll 
+touch build/html/.nojekyll 
 git add docs/.nojekyll ; git commit -m "Disable Jekyll processing"
 
 git add * ; git commit -m "Executed CI Script" ; git  push origin main
