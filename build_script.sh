@@ -36,11 +36,7 @@ done
 
 cd "$CUR_DIR" || exit
 echo -e "Building Sphinx Documentation\n---"
+make html
+ln -s build/html docs
 
-
-git add build/build
-git commit -m "Add generated documentation"
-git push origin main
-
-
-git add . ; git commit -m "Executed CI Script" ; git push
+git add * ; git commit -m "Executed CI Script" ; git push
