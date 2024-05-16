@@ -36,7 +36,6 @@ done
 
 cd "$CUR_DIR" || exit
 echo -e "Building Sphinx Documentation\n---"
-ln 
 
 
 git add build/build
