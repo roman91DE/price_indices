@@ -53,6 +53,10 @@ DEFAULT_NORMALIZATION_VAL = 100.0
 #
 # ### Unweighted Methods
 #
+# #### Jevon Index
+#
+# $P_{J}^{0, t} = \prod_{i \in G_{0, t}} \left(\frac{p_{i}^{t}}{p_{i}^{0}}\right)^{\frac{1}{N_{0, t}}}$
+#
 
 
 def jevons_index(
@@ -138,6 +142,12 @@ def jevons_index_from_df(
     return geometric_mean * normalization_value
 
 
+# #### Dutot Index
+#
+# $P_{D}^{0, t} = \frac{\sum_{i \in G_{0, t}} p_{i}^{t}}{\sum_{i \in G_{0, t}} p_{i}^{0}}$
+#
+
+
 def dutot_index(
     prices_0: Dict[str, float],
     prices_t: Dict[str, float],
@@ -209,6 +219,12 @@ def dutot_index_from_df(
     return (
         prices_t.loc[matched_products].sum() / prices_0.loc[matched_products].sum()
     ) * normalization_value
+
+
+# #### Carli Index
+#
+# $P_{C}^{0, t} = \frac{1}{N_{0, t}} \sum\limits_{i \in G_{0, t}} \frac{p_{i}^{t}}{p_{i}^{0}}$
+#
 
 
 def carli_index(
