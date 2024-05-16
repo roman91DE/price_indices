@@ -88,7 +88,7 @@ def jevons_index(
         ValueError: If no matched products are found.
     """
 
-    matched_products = set(prices_0.keys()) & set(primes_t.keys())
+    matched_products = set(prices_0.keys()) & set(prices_t.keys())
     n = len(matched_products)
 
     if n == 0:
