@@ -64,7 +64,7 @@ def jevons_index(
     prices_t: Dict[str, float],
     normalization_value: float = DEFAULT_NORMALIZATION_VAL,
 ) -> float:
-    """
+    r"""
     Calculate the Jevons price index, which is a geometric mean of the price relatives.
 
     The Jevons price index is defined by the formula:
