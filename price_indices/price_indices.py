@@ -65,7 +65,15 @@ def jevons_index(
     normalization_value: float = DEFAULT_NORMALIZATION_VAL,
 ) -> float:
     """
-    Calculate the Jevons price index.
+    Calculate the Jevons price index, which is a geometric mean of the price relatives.
+
+    The Jevons price index is defined by the formula:
+
+    .. math::
+        P_{J}^{0, t} = \left(\prod_{i \in I} \left(\frac{p_{i}^{t}}{p_{i}^{0}}\right)\right)^{\frac{1}{n}}
+
+    where :math:`p_{i}^{0}` and :math:`p_{i}^{t}` are the prices of product :math:`i` at the base and compared
+    time periods respectively, and :math:`n` is the number of matched products.
 
     Args:
         prices_0 (Dict[str, float]): Prices of products at the base time period.
@@ -73,7 +81,7 @@ def jevons_index(
         normalization_value (float): The value to normalize the index to. Defaults to 100.
 
     Returns:
-        float: Jevons price index.
+        float: Jevons price index, normalized.
 
     Raises:
         ValueError: If no matched products are found.
