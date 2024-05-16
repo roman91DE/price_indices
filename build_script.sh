@@ -45,6 +45,4 @@ git commit -m "Add generated documentation"
 git push origin main
 
 
-
-
 git add . ; git commit -m "Executed CI Script" ; git push
