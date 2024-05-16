@@ -119,11 +119,10 @@ def jevons_index_from_df(
     .. math::
         P_{J}^{0, t} = \prod_{i \in G_{0, t}} \left( \frac{p_{i}^{t}}{p_{i}^{0}} \right)^{\frac{1}{N_{0, t}}}
 
-    where:
-    - :math:`G_{0,t}` is the set of matched products from period 0 and t,
-    - :math:`p_{i}^{0}` and :math:`p_{i}^{t}` are the prices of product :math:`i` at the base and compared
-      time periods respectively,
-    - :math:`N_{0,t}` is the number of matched products.
+    Where:
+    :math:`G_{0,t}` is the set of matched products from period 0 and t,
+    :math:`p_{i}^{0}` and :math:`p_{i}^{t}` are the prices of product :math:`i` at the base and compared
+    time periods respectively, and :math:`N_{0,t}` is the number of matched products.
 
     Args:
         df (pd.DataFrame): The DataFrame containing the price data.
@@ -140,6 +139,7 @@ def jevons_index_from_df(
     Raises:
         ValueError: If no matched products are found.
     """
+
     required_columns = {price_col, product_id_col, time_period_col}
     if not required_columns.issubset(df.columns):
         raise AttributeError(
