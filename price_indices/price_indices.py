@@ -42,6 +42,13 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see <https://www.gnu.org/licenses/>.
 
+Constants:
+- PD_DEFAULT_PRICE_COL: Default column name for prices in DataFrame.
+- PD_DEFAULT_PRODUCT_ID_COL: Default column name for product IDs in DataFrame.
+- PD_DEFAULT_QUANTITY_COL: Default column name for quantities in DataFrame.
+- PD_DEFAULT_TIME_PERIOD_COL: Default column name for time periods in DataFrame.
+- DEFAULT_NORMALIZATION_VAL: Default normalization value for indices.
+
 Functions:
 Unweighted Methods (Native Python):
 - jevons_index
