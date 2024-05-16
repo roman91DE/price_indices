@@ -1,11 +1,17 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import sys
+import os
 import unittest
 from typing import Dict
 import pandas as pd
 
-from price_indices import *
+__module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+if not __module_path in sys.path:
+    sys.path.insert(0, __module_path)
+
+from price_indices.price_indices import *
 
 class TestPriceIndices(unittest.TestCase):
     @classmethod

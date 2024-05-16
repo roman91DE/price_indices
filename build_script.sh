@@ -1,10 +1,15 @@
 #!/bin/bash
 
-PYTHON_PATH="$HOME/miniconda3/envs/DataScience/bin/python"
+PYTHON_PATH=$(which python)
+
+CUR_DIR=$(pwd)
+
+cd "./price_indices" || exit
+
 notebooks=(./price_indices.ipynb)
 
 # Path to the custom nbconvert configuration file
-NB_CONVERT_CONFIG="nbconvert_conf.py"
+NB_CONVERT_CONFIG="./nbconvert_conf.py"
 
 for notebook in "${notebooks[@]}"; do
     # Use the custom nbconvert configuration file
@@ -25,6 +30,13 @@ for notebook in "${notebooks[@]}"; do
 
     # run the tests
     echo -e "Starting Unit Tests\n---"
-    "$PYTHON_PATH" ./test_price_indices.py
+    "$PYTHON_PATH" ../tests/test_price_indices.py
 
 done
+
+cd "$CUR_DIR" || exit
+echo -e "Building Sphinx Documentation\n---"
+make html
+
+
+git add . ; git commit -m "Executed CI Script" ; git push
