@@ -16,7 +16,7 @@ if not __module_path in sys.path:
     sys.path.insert(0, __module_path)
 
 html_theme = 'sphinx_rtd_theme'
-html_static_path = ['_static']
+# html_static_path = ['_static']
 
 project = 'price_indices'
 copyright = '2024, Roman Hoehn'
