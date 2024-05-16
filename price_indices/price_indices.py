@@ -21,61 +21,6 @@ alongside a default normalization value for index calculations.
 """
 
 
-# # Price Indices
-#
-# Unweighted Methods:
-# - Jevons Index
-# - Dutot Index
-# - Carli Index
-# - Balk-Mehrhoff-Walsh (BMW) Index
-#
-# Weighted Methods:
-# - Laspeyres Index
-# - Paasche Index
-# - Fisher Index
-# - Törnqvist Index
-# - Walsh Index
-# - Sato-Vartia Index
-#
-#
-# Constants:
-# - PD_DEFAULT_PRICE_COL: Default column name for prices in DataFrame.
-# - PD_DEFAULT_PRODUCT_ID_COL: Default column name for product IDs in DataFrame.
-# - PD_DEFAULT_QUANTITY_COL: Default column name for quantities in DataFrame.
-# - PD_DEFAULT_TIME_PERIOD_COL: Default column name for time periods in DataFrame.
-# - DEFAULT_NORMALIZATION_VAL: Default normalization value for indices.
-#
-#
-# Functions:
-# Unweighted Methods (Native Python):
-# - jevons_index
-# - dutot_index
-# - carli_index
-# - bmw_index
-#
-# Unweighted Methods (pandas DataFrame):
-# - jevons_index_from_df
-# - dutot_index_from_df
-# - carli_index_from_df
-# - bmw_index_from_df
-#
-# Weighted Methods (Native Python):
-# - laspeyres_index
-# - paasche_index
-# - fisher_index
-# - tornqvist_index
-# - walsh_index
-# - sato_vartia_index
-#
-# Weighted Methods (pandas DataFrame):
-# - laspeyres_index_from_df
-# - paasche_index_from_df
-# - fisher_index_from_df
-# - tornqvist_index_from_df
-# - walsh_index_from_df
-# - sato_vartia_index_from_df
-#
-
 # ## Dependencies
 
 import numpy as np
