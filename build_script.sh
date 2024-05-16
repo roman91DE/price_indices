@@ -38,5 +38,8 @@ cd "$CUR_DIR" || exit
 echo -e "Building Sphinx Documentation\n---"
 make html
 
+cp build/html docs
+
+
 
 git add . ; git commit -m "Executed CI Script" ; git push
