@@ -90,10 +90,19 @@ from math import sqrt, log, exp
 
 # ## Module Constants
 
+#: Default column name for prices in DataFrame.
 PD_DEFAULT_PRICE_COL = "price"
+
+#: Default column name for product IDs in DataFrame.
 PD_DEFAULT_PRODUCT_ID_COL = "product_id"
+
+#: Default column name for quantities in DataFrame.
 PD_DEFAULT_QUANTITY_COL = "quantity"
+
+#: Default column name for time periods in DataFrame.
 PD_DEFAULT_TIME_PERIOD_COL = "time_period"
+
+#: Default normalization value for indices.
 DEFAULT_NORMALIZATION_VAL = 100.0
 
 
