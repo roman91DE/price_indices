@@ -101,6 +101,18 @@
              
   <section id="module-price_indices.price_indices">
 <span id="price-indices-package"></span><h1>Price Indices Package<a class="headerlink" href="#module-price_indices.price_indices" title="Link to this heading"></a></h1>
+<p>This Python package computes various price indices using both unweighted and weighted methods,
+suitable for different types of data handling needs. It supports calculations via native Python
+structures as well as pandas DataFrames, facilitating ease of integration into data analysis workflows.</p>
+<p>Supported Unweighted Methods:
+- Jevons, Dutot, Carli, Balk-Mehrhoff-Walsh (BMW) Indices.</p>
+<p>Supported Weighted Methods:
+- Laspeyres, Paasche, Fisher, Törnqvist, Walsh, Sato-Vartia Indices.</p>
+<p>The package allows using dictionaries for input data in native Python functions and DataFrames for
+pandas-enabled functions, with options to specify base and comparison periods. It is distributed
+under the GNU General Public License v3 or later, ensuring freedom to modify and redistribute the software.</p>
+<p>Constants define default DataFrame columns for prices, product IDs, quantities, and time periods,
+alongside a default normalization value for index calculations.</p>
 <dl class="py data">
 <dt class="sig sig-object py" id="price_indices.price_indices.DEFAULT_NORMALIZATION_VAL">
 <span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">DEFAULT_NORMALIZATION_VAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">100.0</span></em><a class="headerlink" href="#price_indices.price_indices.DEFAULT_NORMALIZATION_VAL" title="Link to this definition"></a></dt>

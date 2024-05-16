@@ -1,12 +1,27 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Price Indices Package
+"""
+This Python package computes various price indices using both unweighted and weighted methods,
+suitable for different types of data handling needs. It supports calculations via native Python
+structures as well as pandas DataFrames, facilitating ease of integration into data analysis workflows.
 
-# This package provides functions to calculate various price indices, including
-# both unweighted and weighted methods. The package includes native Python
-# implementations as well as pandas DataFrame-based implementations for flexible
-# data handling.
+Supported Unweighted Methods:
+- Jevons, Dutot, Carli, Balk-Mehrhoff-Walsh (BMW) Indices.
+
+Supported Weighted Methods:
+- Laspeyres, Paasche, Fisher, Törnqvist, Walsh, Sato-Vartia Indices.
+
+The package allows using dictionaries for input data in native Python functions and DataFrames for 
+pandas-enabled functions, with options to specify base and comparison periods. It is distributed 
+under the GNU General Public License v3 or later, ensuring freedom to modify and redistribute the software.
+
+Constants define default DataFrame columns for prices, product IDs, quantities, and time periods, 
+alongside a default normalization value for index calculations.
+"""
+
+
+# # Price Indices
 #
 # Unweighted Methods:
 # - Jevons Index
@@ -21,23 +36,6 @@
 # - Törnqvist Index
 # - Walsh Index
 # - Sato-Vartia Index
-#
-# The native Python functions calculate price indices using dictionaries for
-# input data, while the pandas functions work directly with DataFrames and
-# support specifying base and compared time periods for computing the indices.
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <https://www.gnu.org/licenses/>.
 #
 #
 # Constants:
