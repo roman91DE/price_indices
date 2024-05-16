@@ -178,6 +178,70 @@
 
 
 
+<div class="viewcode-block" id="jevons_index_from_df">
+<a class="viewcode-back" href="../../modules.html#price_indices.price_indices.jevons_index_from_df">[docs]</a>
+<span class="k">def</span> <span class="nf">jevons_index_from_df</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">base_period</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">compared_period</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">price_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_PRICE_COL</span><span class="p">,</span>
+    <span class="n">product_id_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_PRODUCT_ID_COL</span><span class="p">,</span>
+    <span class="n">time_period_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">PD_DEFAULT_TIME_PERIOD_COL</span><span class="p">,</span>
+    <span class="n">normalization_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_NORMALIZATION_VAL</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the Jevons price index from a pandas.DataFrame.</span>
+
+<span class="sd">    The Jevons price index is defined by the formula:</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        P_{J}^{0, t} = \prod_{i \in G_{0, t}} \left( \frac{p_{i}^{t}}{p_{i}^{0}} \right)^{\frac{1}{N_{0, t}}}</span>
+
+<span class="sd">    where:</span>
+<span class="sd">    - :math:`G_{0,t}` is the set of matched products from period 0 and t,</span>
+<span class="sd">    - :math:`p_{i}^{0}` and :math:`p_{i}^{t}` are the prices of product :math:`i` at the base and compared</span>
+<span class="sd">      time periods respectively,</span>
+<span class="sd">    - :math:`N_{0,t}` is the number of matched products.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df (pd.DataFrame): The DataFrame containing the price data.</span>
+<span class="sd">        base_period (int): The base time period.</span>
+<span class="sd">        compared_period (int): The compared time period.</span>
+<span class="sd">        price_col (str): The name of the column containing the prices. Defaults to &#39;price&#39;.</span>
+<span class="sd">        product_id_col (str): The name of the column containing the product IDs. Defaults to &#39;product_id&#39;.</span>
+<span class="sd">        time_period_col (str): The name of the column containing the time periods. Defaults to &#39;time_period&#39;.</span>
+<span class="sd">        normalization_value (float): The value to normalize the index to. Defaults to 100.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Jevons price index.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no matched products are found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">required_columns</span> <span class="o">=</span> <span class="p">{</span><span class="n">price_col</span><span class="p">,</span> <span class="n">product_id_col</span><span class="p">,</span> <span class="n">time_period_col</span><span class="p">}</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">required_columns</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;DataFrame does not contain the necessary columns: </span><span class="si">{</span><span class="n">required_columns</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">prices_0</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">time_period_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">base_period</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">product_id_col</span><span class="p">)[</span>
+        <span class="n">price_col</span>
+    <span class="p">]</span>
+    <span class="n">prices_t</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">time_period_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">compared_period</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">product_id_col</span><span class="p">)[</span>
+        <span class="n">price_col</span>
+    <span class="p">]</span>
+
+    <span class="n">matched_products</span> <span class="o">=</span> <span class="n">prices_0</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">prices_t</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">matched_products</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No matched products found.&quot;</span><span class="p">)</span>
+
+    <span class="n">ratios</span> <span class="o">=</span> <span class="n">prices_t</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">]</span> <span class="o">/</span> <span class="n">prices_0</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">matched_products</span><span class="p">]</span>
+    <span class="n">geometric_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ratios</span><span class="p">)))</span>
+
+    <span class="k">return</span> <span class="n">geometric_mean</span> <span class="o">*</span> <span class="n">normalization_value</span></div>
+
+
+
 <span class="c1"># #### Dutot Index</span>
 <span class="c1">#</span>
 <span class="c1"># $P_{D}^{0, t} = \frac{\sum_{i \in G_{0, t}} p_{i}^{t}}{\sum_{i \in G_{0, t}} p_{i}^{0}}$</span>
