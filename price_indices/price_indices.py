@@ -70,11 +70,12 @@ def jevons_index(
     The Jevons price index is defined by the formula:
 
     .. math::
-        P_{J}^{0, t} = \left(\prod_{i \in I} \left(\frac{p_{i}^{t}}{p_{i}^{0}}\right)\right)^{\frac{1}{n}}
+        P_{J}^{0, t} = \prod_{i \in G_{0, t}} \left( \frac{p_{i}^{t}}{p_{i}^{0}} \right)^{\frac{1}{N_{0, t}}}
 
     Where:
+    :math:`G_{0,t}` is the set of matched products from period 0 and t,
     :math:`p_{i}^{0}` and :math:`p_{i}^{t}` are the prices of product :math:`i` at the base and compared
-    time periods respectively, and :math:`n` is the number of matched products.
+    time periods respectively, and :math:`N_{0,t}` is the number of matched products.
 
     Args:
         prices_0 (Dict[str, float]): Prices of products at the base time period.
