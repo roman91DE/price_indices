@@ -38,7 +38,10 @@ cd "$CUR_DIR" || exit
 echo -e "Building Sphinx Documentation\n---"
 make html
 
-cp build/html docs
+git add build/html
+git commit -m "Add generated documentation"
+git push origin main
+
 
 
 
