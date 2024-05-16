@@ -61,7 +61,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#price_indices.price_indices.fisher_index"><code class="docutils literal notranslate"><span class="pre">fisher_index()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#price_indices.price_indices.fisher_index_from_df"><code class="docutils literal notranslate"><span class="pre">fisher_index_from_df()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#price_indices.price_indices.jevons_index"><code class="docutils literal notranslate"><span class="pre">jevons_index()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#price_indices.price_indices.jevons_index_from_df"><code class="docutils literal notranslate"><span class="pre">jevons_index_from_df()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#price_indices.price_indices.laspeyres_index"><code class="docutils literal notranslate"><span class="pre">laspeyres_index()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#price_indices.price_indices.laspeyres_index_from_df"><code class="docutils literal notranslate"><span class="pre">laspeyres_index_from_df()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#price_indices.price_indices.paasche_index"><code class="docutils literal notranslate"><span class="pre">paasche_index()</span></code></a></li>
@@ -378,34 +377,6 @@ time periods respectively, and <span class="math notranslate nohighlight">\(n\)<
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Jevons price index, normalized.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If no matched products are found.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="price_indices.price_indices.jevons_index_from_df">
-<span class="sig-prename descclassname"><span class="pre">price_indices.price_indices.</span></span><span class="sig-name descname"><span class="pre">jevons_index_from_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compared_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'price'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">product_id_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'product_id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_period_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'time_period'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/price_indices/price_indices.html#jevons_index_from_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#price_indices.price_indices.jevons_index_from_df" title="Link to this definition"></a></dt>
-<dd><p>Calculate the Jevons price index from a pandas.DataFrame.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – The DataFrame containing the price data.</p></li>
-<li><p><strong>base_period</strong> (<em>int</em>) – The base time period.</p></li>
-<li><p><strong>compared_period</strong> (<em>int</em>) – The compared time period.</p></li>
-<li><p><strong>price_col</strong> (<em>str</em>) – The name of the column containing the prices. Defaults to ‘price’.</p></li>
-<li><p><strong>product_id_col</strong> (<em>str</em>) – The name of the column containing the product IDs. Defaults to ‘product_id’.</p></li>
-<li><p><strong>time_period_col</strong> (<em>str</em>) – The name of the column containing the time periods. Defaults to ‘time_period’.</p></li>
-<li><p><strong>normalization_value</strong> (<em>float</em>) – The value to normalize the index to. Defaults to 100.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Jevons price index.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>

@@ -86,10 +86,9 @@ def jevons_index(
 
     Raises:
         ValueError: If no matched products are found.
-
     """
 
-    matched_products = set(prices_0.keys()) & set(prices_t.keys())
+    matched_products = set(prices_0.keys()) & set(primes_t.keys())
     n = len(matched_products)
 
     if n == 0:
@@ -100,57 +99,6 @@ def jevons_index(
         product *= (prices_t[product_id] / prices_0[product_id]) ** (1 / n)
 
     return product * normalization_value
-
-
-def jevons_index_from_df(
-    df: pd.DataFrame,
-    base_period: int,
-    compared_period: int,
-    price_col: str = PD_DEFAULT_PRICE_COL,
-    product_id_col: str = PD_DEFAULT_PRODUCT_ID_COL,
-    time_period_col: str = PD_DEFAULT_TIME_PERIOD_COL,
-    normalization_value: float = DEFAULT_NORMALIZATION_VAL,
-) -> float:
-    """
-    Calculate the Jevons price index from a pandas.DataFrame.
-
-    Args:
-        df (pd.DataFrame): The DataFrame containing the price data.
-        base_period (int): The base time period.
-        compared_period (int): The compared time period.
-        price_col (str): The name of the column containing the prices. Defaults to 'price'.
-        product_id_col (str): The name of the column containing the product IDs. Defaults to 'product_id'.
-        time_period_col (str): The name of the column containing the time periods. Defaults to 'time_period'.
-        normalization_value (float): The value to normalize the index to. Defaults to 100.
-
-    Returns:
-        float: Jevons price index.
-
-    Raises:
-        ValueError: If no matched products are found.
-    """
-
-    required_columns = {price_col, product_id_col, time_period_col}
-    if not required_columns.issubset(df.columns):
-        raise AttributeError(
-            f"DataFrame does not contain the necessary columns: {required_columns}"
-        )
-
-    prices_0 = df[df[time_period_col] == base_period].set_index(product_id_col)[
-        price_col
-    ]
-    prices_t = df[df[time_period_col] == compared_period].set_index(product_id_col)[
-        price_col
-    ]
-
-    matched_products = prices_0.index.intersection(prices_t.index)
-    if matched_products.empty:
-        raise ValueError("No matched products found.")
-
-    ratios = prices_t.loc[matched_products] / prices_0.loc[matched_products]
-    geometric_mean = np.exp(np.mean(np.log(ratios)))
-
-    return geometric_mean * normalization_value
 
 
 # #### Dutot Index
