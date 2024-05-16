@@ -28,85 +28,12 @@ To install the package, you can use the following command:
 pip install price_indices
 ```
 
-## Constants
+## Documentation
 
-The following constants are used in the package:
+## Documentation
 
-- `PD_DEFAULT_PRICE_COL`: Default column name for prices in DataFrame.
-- `PD_DEFAULT_PRODUCT_ID_COL`: Default column name for product IDs in DataFrame.
-- `PD_DEFAULT_QUANTITY_COL`: Default column name for quantities in DataFrame.
-- `PD_DEFAULT_TIME_PERIOD_COL`: Default column name for time periods in DataFrame.
-- `DEFAULT_NORMALIZATION_VAL`: Default normalization value for indices.
+The full documentation is available [here](https://roman91DE.github.io/price-indices/).
 
-## Functions
-
-### Unweighted Methods (Native Python)
-
-#### `jevons_index(prices_0: Dict[str, float], prices_t: Dict[str, float], normalization_value: float = DEFAULT_NORMALIZATION_VAL) -> float`
-Calculate the Jevons price index.
-
-#### `dutot_index(prices_0: Dict[str, float], prices_t: Dict[str, float], normalization_value: float = DEFAULT_NORMALIZATION_VAL) -> float`
-Calculate the Dutot price index.
-
-#### `carli_index(prices_0: Dict[str, float], prices_t: Dict[str, float], normalization_value: float = DEFAULT_NORMALIZATION_VAL) -> float`
-Calculate the Carli price index.
-
-#### `bmw_index(prices_0: Dict[str, float], prices_t: Dict[str, float], normalization_value: float = DEFAULT_NORMALIZATION_VAL) -> float`
-Calculate the Balk-Mehrhoff-Walsh (BMW) price index.
-
-### Unweighted Methods (pandas DataFrame)
-
-#### `jevons_index_from_df(df: pd.DataFrame, base_period: int, compared_period: int, price_col: str = PD_DEFAULT_PRICE_COL, product_id_col: str = PD_DEFAULT_PRODUCT_ID_COL, time_period_col: str = PD_DEFAULT_TIME_PERIOD_COL, normalization_value: float = DEFAULT_NORMALIZATION_VAL) -> float`
-Calculate the Jevons price index from a pandas DataFrame.
-
-#### `dutot_index_from_df(df: pd.DataFrame, base_period: int, compared_period: int, price_col: str = PD_DEFAULT_PRICE_COL, product_id_col: str = PD_DEFAULT_PRODUCT_ID_COL, time_period_col: str = PD_DEFAULT_TIME_PERIOD_COL, normalization_value: float = DEFAULT_NORMALIZATION_VAL) -> float`
-Calculate the Dutot price index from a pandas DataFrame.
-
-#### `carli_index_from_df(df: pd.DataFrame, base_period: int, compared_period: int, price_col: str = PD_DEFAULT_PRICE_COL, product_id_col: str = PD_DEFAULT_PRODUCT_ID_COL, time_period_col: str = PD_DEFAULT_TIME_PERIOD_COL, normalization_value: float = DEFAULT_NORMALIZATION_VAL) -> float`
-Calculate the Carli price index from a pandas DataFrame.
-
-#### `bmw_index_from_df(df: pd.DataFrame, base_period: int, compared_period: int, price_col: str = PD_DEFAULT_PRICE_COL, product_id_col: str = PD_DEFAULT_PRODUCT_ID_COL, time_period_col: str = PD_DEFAULT_TIME_PERIOD_COL, normalization_value: float = DEFAULT_NORMALIZATION_VAL) -> float`
-Calculate the Balk-Mehrhoff-Walsh (BMW) price index from a pandas DataFrame.
-
-### Weighted Methods (Native Python)
-
-#### `laspeyres_index(prices_0: Dict[str, float], prices_t: Dict[str, float], quantities_0: Dict[str, float], normalization_value: float = DEFAULT_NORMALIZATION_VAL) -> float`
-Calculate the Laspeyres price index.
-
-#### `paasche_index(prices_0: Dict[str, float], prices_t: Dict[str, float], quantities_t: Dict[str, float], normalization_value: float = DEFAULT_NORMALIZATION_VAL) -> float`
-Calculate the Paasche price index.
-
-#### `fisher_index(prices_0: Dict[str, float], prices_t: Dict[str, float], quantities_0: Dict[str, float], quantities_t: Dict[str, float], normalization_value: float = DEFAULT_NORMALIZATION_VAL) -> float`
-Calculate the Fisher price index.
-
-#### `tornqvist_index(prices_0: Dict[str, float], prices_t: Dict[str, float], quantities_0: Dict[str, float], quantities_t: Dict[str, float], normalization_value: float = DEFAULT_NORMALIZATION_VAL) -> float`
-Calculate the Törnqvist price index.
-
-#### `walsh_index(prices_0: Dict[str, float], prices_t: Dict[str, float], quantities_0: Dict[str, float], quantities_t: Dict[str, float], normalization_value: float = DEFAULT_NORMALIZATION_VAL) -> float`
-Calculate the Walsh price index.
-
-#### `sato_vartia_index(prices_0: Dict[str, float], prices_t: Dict[str, float], quantities_0: Dict[str, float], quantities_t: Dict[str, float], normalization_value: float = DEFAULT_NORMALIZATION_VAL) -> float`
-Calculate the Sato-Vartia price index.
-
-### Weighted Methods (pandas DataFrame)
-
-#### `laspeyres_index_from_df(df: pd.DataFrame, base_period: int, compared_period: int, price_col: str = PD_DEFAULT_PRICE_COL, quantity_col: str = PD_DEFAULT_QUANTITY_COL, product_id_col: str = PD_DEFAULT_PRODUCT_ID_COL, time_period_col: str = PD_DEFAULT_TIME_PERIOD_COL, normalization_value: float = DEFAULT_NORMALIZATION_VAL) -> float`
-Calculate the Laspeyres price index from a pandas DataFrame.
-
-#### `paasche_index_from_df(df: pd.DataFrame, base_period: int, compared_period: int, price_col: str = PD_DEFAULT_PRICE_COL, quantity_col: str = PD_DEFAULT_QUANTITY_COL, product_id_col: str = PD_DEFAULT_PRODUCT_ID_COL, time_period_col: str = PD_DEFAULT_TIME_PERIOD_COL, normalization_value: float = DEFAULT_NORMALIZATION_VAL) -> float`
-Calculate the Paasche price index from a pandas DataFrame.
-
-#### `fisher_index_from_df(df: pd.DataFrame, base_period: int, compared_period: int, price_col: str = PD_DEFAULT_PRICE_COL, quantity_col: str = PD_DEFAULT_QUANTITY_COL, product_id_col: str = PD_DEFAULT_PRODUCT_ID_COL, time_period_col: str = PD_DEFAULT_TIME_PERIOD_COL, normalization_value: float = DEFAULT_NORMALIZATION_VAL) -> float`
-Calculate the Fisher price index from a pandas DataFrame.
-
-#### `tornqvist_index_from_df(df: pd.DataFrame, base_period: int, compared_period: int, price_col: str = PD_DEFAULT_PRICE_COL, quantity_col: str = PD_DEFAULT_QUANTITY_COL, product_id_col: str = PD_DEFAULT_PRODUCT_ID_COL, time_period_col: str = PD_DEFAULT_TIME_PERIOD_COL, normalization_value: float = DEFAULT_NORMALIZATION_VAL) -> float`
-Calculate the Törnqvist price index from a pandas DataFrame.
-
-#### `walsh_index_from_df(df: pd.DataFrame, base_period: int, compared_period: int, price_col: str = PD_DEFAULT_PRICE_COL, quantity_col: str = PD_DEFAULT_QUANTITY_COL, product_id_col: str = PD_DEFAULT_PRODUCT_ID_COL, time_period_col: str = PD_DEFAULT_TIME_PERIOD_COL, normalization_value: float = DEFAULT_NORMALIZATION_VAL) -> float`
-Calculate the Walsh price index from a pandas DataFrame.
-
-#### `sato_vartia_index_from_df(df: pd.DataFrame, base_period: int, compared_period: int, price_col: str = PD_DEFAULT_PRICE_COL, quantity_col: str = PD_DEFAULT_QUANTITY_COL, product_id_col: str = PD_DEFAULT_PRODUCT_ID_COL, time_period_col: str = PD_DEFAULT_TIME_PERIOD_COL, normalization_value: float = DEFAULT_NORMALIZATION_VAL) -> float`
-Calculate the Sato-Vartia price index from a pandas DataFrame.
 
 ## License
 
